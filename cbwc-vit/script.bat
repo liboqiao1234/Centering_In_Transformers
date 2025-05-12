@@ -1,0 +1,1 @@
+python train.py --arch vit_tiny --m ori --lr 1e-4 --img_size 32 --batch_size 64 --patch_size 4 --wd 0.1 --num_classes 10 --data_path "D:\Desktop\main\BUAA\Research\Learning_Dynamics\cbwc-vit\data" --dump_path "D:\Desktop\main\BUAA\Research\Learning_Dynamics\cbwc-vit\result" --seed 1 --wandb True
