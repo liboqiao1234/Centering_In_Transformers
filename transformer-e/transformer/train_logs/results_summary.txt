@@ -1,0 +1,35 @@
+训练结果总结 - Tue Apr 29 00:27:54 CST 2025
+============================================================
+训练参数:
+初始学习率: 0.0001
+学习率调度器: transformer_warmup
+预热步数: 4000
+============================================================
+LayerNorm 模型:
+| Test Loss: 3.686 | Test PPL:  39.880 | Test BLEU: 17.429 |
+
+LayerNorm 学习率变化:
+	Learning Rate: 0.00003983
+	Learning Rate: 0.00007949
+	Learning Rate: 0.00011914
+	Learning Rate: 0.00015880
+	Learning Rate: 0.00019845
+	Learning Rate: 0.00023811
+	Learning Rate: 0.00027776
+	Learning Rate: 0.00031742
+	Learning Rate: 0.00035707
+	Learning Rate: 0.00039673
+...
+============================================================
+RMSNorm 模型:
+| Test Loss: 3.686 | Test PPL:  39.880 | Test BLEU: 17.429 |
+
+RMSNorm 学习率变化:
+...
+	Learning Rate: 0.00033646
+	Learning Rate: 0.00033427
+	Learning Rate: 0.00033212
+	Learning Rate: 0.00033001
+	Learning Rate: 0.00032794
+============================================================
+完整日志: train_logs/train_comparison_20250429_000124.log

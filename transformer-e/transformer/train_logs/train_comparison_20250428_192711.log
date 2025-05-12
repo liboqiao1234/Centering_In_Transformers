@@ -1,0 +1,344 @@
+============================================================
+训练开始时间: Mon Apr 28 19:27:11 CST 2025
+随机种子: 42
+训练轮数: 20
+批次大小: 128
+模型维度: 512
+层数: 6
+注意力头数: 8
+前馈网络隐藏层维度: 2048
+============================================================
+==========================================================
+开始使用LayerNorm训练模型...
+开始时间: Mon Apr 28 19:27:11 CST 2025
+==========================================================
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: uuq2024 (whsjrc-buaa) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /root/autodl-tmp/transformer-e/transformer/wandb/run-20250428_192722-hd6w2kob
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run transformer-translation_e20_b128_d512_n6_h8_f2048_LayerNorm_seed42
+wandb: ⭐️ View project at https://wandb.ai/whsjrc-buaa/transformer-translation
+wandb: 🚀 View run at https://wandb.ai/whsjrc-buaa/transformer-translation/runs/hd6w2kob
+/root/autodl-tmp/transformer-e/transformer/train.py:33: UserWarning: nn.init.kaiming_uniform is now deprecated in favor of nn.init.kaiming_uniform_.
+  nn.init.kaiming_uniform(m.weight.data)
+/root/miniconda3/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+wandb: uploading output.log; uploading wandb-summary.json
+wandb: uploading history steps 4516-4560, summary, console lines 145-150
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb: decoder.layers.0.norm1_InputAngleMean █▅▄▂▂▃▁▂▁▂▂▃▃▃▂▂▃▃▂▂▂▃▃▃▂▄▃▂▃▂▂▂▂▂▃▂▂▃▂▄
+wandb:  decoder.layers.0.norm1_InputAngleStd ▅▆▆▅▅▅▃▄█▆▄▄▅▅▄▆▂▅▅▃▃▄▃▃▃▃▂▃▃▃▄▃▂▃▂▄▂▂▁▃
+wandb: decoder.layers.0.norm2_InputAngleMean ██▆▄▃▁▂▂▂▂▃▁▂▁▁▂▂▂▄▃▃▃▃▄▄▄▃▄▄▄▄▅▅▅▅▆▆▆▆▆
+wandb:  decoder.layers.0.norm2_InputAngleStd █▄▃▄▃▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: decoder.layers.0.norm3_InputAngleMean ▁▁▁▂▁▂▂▂▂▂▂▂▃▃▂▃▃▄▅▅▅▆▅▆▆▆▆▆▆▆▇▇▇▇▇█████
+wandb:  decoder.layers.0.norm3_InputAngleStd ██▆▅▆▃▃▁▁▁▁▂▂▃▂▃▂▃▂▁▂▂▃▃▁▁▂▁▂▂▂▃▂▁▃▁▂▁▂▂
+wandb: decoder.layers.1.norm1_InputAngleMean ▂▂▃█▄▃▁▃▃▂▂▂▁▂▁▂▁▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆
+wandb:  decoder.layers.1.norm1_InputAngleStd ▇█▇▆▇▄▄▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▂▂▁▁▂▂▁▂▁▁▁▁▁▂
+wandb: decoder.layers.1.norm2_InputAngleMean ▂▁▃▂▃▃▃▅▆▇▇▆▅▆▅▆▆▆▆▆▆▆▆▅▆▆▆▆▆▆▇▇▇▇▇▇████
+wandb:  decoder.layers.1.norm2_InputAngleStd █▇▇▆▆▄▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▁▂
+wandb: decoder.layers.1.norm3_InputAngleMean █▇▁▃▃▃▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▅▅▅▅▆▆▆
+wandb:  decoder.layers.1.norm3_InputAngleStd █▅▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: decoder.layers.2.norm1_InputAngleMean ▂▁▄▅▇▅▆▆▆▆▆▆▆▇▆▆▆▆▆▆▆▇▆▆▆▆▆▇▇▇▇▇▇▇▇█████
+wandb:  decoder.layers.2.norm1_InputAngleStd █▃▃▃▄▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▂▂▁▂▁▂
+wandb: decoder.layers.2.norm2_InputAngleMean ▅▄▅█▄▄▃▃▃▃▂▁▂▁▃▂▁▂▁▁▁▁▂▂▂▂▂▂▂▂▂▂▂▂▃▃▃▃▃▃
+wandb:  decoder.layers.2.norm2_InputAngleStd █▇▅▅▆▆▄▅▄▃▃▃▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: decoder.layers.2.norm3_InputAngleMean ▄▃▃▃▄▂▁▁▁▁▂▂▃▂▂▂▂▂▂▃▃▄▄▄▄▄▅▆▆▆▆▇▆▇▇▆▇▇██
+wandb:  decoder.layers.2.norm3_InputAngleStd ▆▇█▇▇▄▃▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁
+wandb: decoder.layers.3.norm1_InputAngleMean ▁▂▄▇▆▆▇▄▄▆▆▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆▇▇▇▆▇▇▇▇▇████
+wandb:  decoder.layers.3.norm1_InputAngleStd ██▆▄▄▅▄▅▄▃▄▃▄▄▇▄▆▅▄▄▃▃▃▄▃▃▂▂▃▂▁▂▁▂▃▂▂▂▂▂
+wandb: decoder.layers.3.norm2_InputAngleMean ▃▃▃▁▅▆▆▆▆▆▆▅▅▆▆▆▆▆▆▆▆▆▆▇▆▇▇▆▇▇▇▇▇▇▇▇▇▇▇█
+wandb:  decoder.layers.3.norm2_InputAngleStd ▇█▆▅▆▄▃▃▃▃▃▂▂▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb: decoder.layers.3.norm3_InputAngleMean ▄▁▅▃▄▄▄▂▅▄▄▅▆▆▆▇▆▆▆▇▇▇▇▇▇▇▇█████████████
+wandb:  decoder.layers.3.norm3_InputAngleStd █▇▅▅▄▃▂▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▂▁▁
+wandb: decoder.layers.4.norm1_InputAngleMean █▇▆▃▆▂▂▁▄▄▄▄▄▄▃▅▄▅▅▅▅▅▅▅▅▅▅▅▅▅▆▅▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.4.norm1_InputAngleStd █▆▄▄▄▂▃▃▃▄▃▄▃▄▅▃▂▃▄▂▂▃▃▂▂▂▃▂▃▂▃▃▂▃▂▂▂▂▂▁
+wandb: decoder.layers.4.norm2_InputAngleMean █▇▇▆▇▇█▇▆▇▅▂▃▃▁▄▃▅▅▄▆▆▄▅▃▄▅▄▅▅▄▅▅▅▅▅▆▅▅▅
+wandb:  decoder.layers.4.norm2_InputAngleStd █▆█▆▆▆▆▅▆▅▅▅▅▄▄▃▂▃▂▂▃▂▂▂▂▂▂▁▂▂▁▁▂▁▁▁▂▁▁▁
+wandb: decoder.layers.4.norm3_InputAngleMean ▁█▆▇▆▇▇▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+wandb:  decoder.layers.4.norm3_InputAngleStd █▇▅▆▃▃▄▄▃▃▃▃▂▃▂▂▃▂▂▂▂▂▁▂▂▂▁▁▂▁▁▁▁▁▂▂▁▁▁▁
+wandb: decoder.layers.5.norm1_InputAngleMean ▅▆▁▃▄▄▇█▆▇▆▇▆▆▅▅▇▆▆▆▆▇▇▇▇▆▇▆▇▇▆▇▇▆▇▆▆▇▇▇
+wandb:  decoder.layers.5.norm1_InputAngleStd ▅▅▆▅▅▄▂▃▅▃▂▃▃▃▅█▄▄▅▄▂▃▂▄▂▁▃▃▄▃▃▄▃▃▃▃▂▂▁▃
+wandb: decoder.layers.5.norm2_InputAngleMean █▇▆▅▇▃▅▅▄▅▄▆▁▁▆▆▂▁▁▃▆▂▆▆▅▆▃▄▅▃▆▅▄▄▅▄▄▄▄▄
+wandb:  decoder.layers.5.norm2_InputAngleStd █▅▄▃▆▅▇▄▆▅▅▅▄▅▃▄▅▃▃▄▃▃▃▄▄▂▄▁▃▃▂▁▂▁▂▂▂▂▃▃
+wandb: decoder.layers.5.norm3_InputAngleMean █▆▆▆▅▄▅▄▅▅▃▂▁▂▂▂▂▄▄▄▃▃▂▃▃▄▃▃▃▃▃▄▄▃▄▄▅▄▄▄
+wandb:  decoder.layers.5.norm3_InputAngleStd ▆▆▇▆█▅█▆▇▅▅▅▆▆▇▆▄▄▆▆▅▅▆▇▅▄▆▃▅▃▃▅▃▄▄▂▄▂▃▁
+wandb: encoder.layers.0.norm1_InputAngleMean █▇▇▇▆▅▅▅▅▅▄▄▃▄▂▂▃▂▂▂▂▂▂▂▁▂▃▂▂▁▁▂▂▂▁▂▁▂▃▂
+wandb:  encoder.layers.0.norm1_InputAngleStd ▅▃▅▆▅▃▅▅▁▅▂▃▄▄▃▂▆▁▅▄█▄▄█▅▅▄▆▄▁▄▅▅▆▂▆▃▄▃▆
+wandb: encoder.layers.0.norm2_InputAngleMean ▁▄▄▅▄█▇▇▇▅▅▄▄▅▅▄▅▄▄▅▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▅▆
+wandb:  encoder.layers.0.norm2_InputAngleStd ▆█▅▅▅▄▃▃▃▃▂▂▂▁▂▂▁▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: encoder.layers.1.norm1_InputAngleMean ▇█▇▅▅▃▃▂▃▃▂▁▁▂▁▁▁▁▁▂▂▁▁▁▁▂▁▂▂▁▁▁▂▁▁▁▁▂▂▂
+wandb:  encoder.layers.1.norm1_InputAngleStd ██▇▇▅▄▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: encoder.layers.1.norm2_InputAngleMean █▇▇▇▄▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  encoder.layers.1.norm2_InputAngleStd █▇▃▄▄▃▃▂▂▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: encoder.layers.2.norm1_InputAngleMean █▇▇▃▅▁▆▇▆▇▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▇▇▆
+wandb:  encoder.layers.2.norm1_InputAngleStd ▇████▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: encoder.layers.2.norm2_InputAngleMean ▃▅█▁▁▃▃▅▅▁▁▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▂▂▂▂
+wandb:  encoder.layers.2.norm2_InputAngleStd ▇▆█▇▅▃▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: encoder.layers.3.norm1_InputAngleMean ▃▁█▇▆▅▆███▇▇▇▇██▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇███
+wandb:  encoder.layers.3.norm1_InputAngleStd ▇▇▆█▇▆▄▄▄▅▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁
+wandb: encoder.layers.3.norm2_InputAngleMean ▁▂▃▃▄▆▅▆▆▆▇▇▇▇▇█▇███▇█▇▇▇█▇▇▇▇█▇█▇██████
+wandb:  encoder.layers.3.norm2_InputAngleStd ▇▇███▆▅▄▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb: encoder.layers.4.norm1_InputAngleMean █▅▁█████▄▃▅▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+wandb:  encoder.layers.4.norm1_InputAngleStd ▇█▆▇▆▅▅▅▅▄▃▂▃▃▂▁▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb: encoder.layers.4.norm2_InputAngleMean ▇█▇▇▇▆▅▄▄▃▃▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  encoder.layers.4.norm2_InputAngleStd ▇█▆▇▅▃▄▃▃▃▃▂▃▃▂▂▂▂▂▂▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▂▂▂▁
+wandb: encoder.layers.5.norm1_InputAngleMean ▁▂▁▃▄▃▃▄▄▄▅▅▅▅▄▄▅▇▅▇▄▆▇█▆▆▆▆█▇▇▇▇▆██▇███
+wandb:  encoder.layers.5.norm1_InputAngleStd ▇██▆▇▆▇▆▇▆▅▆▄▅▇▄▄▄▃▃▄▃▃▂▂▂▂▂▁▁▁▂▁▁▁▁▁▁▂▂
+wandb: encoder.layers.5.norm2_InputAngleMean █▃▂▄▃▃▄▄▃▂▃▃▃▄▅▄▃▃▃▄▃▃▃▂▃▂▂▃▂▁▂▂▂▂▂▃▃▃▃▃
+wandb:  encoder.layers.5.norm2_InputAngleStd █▇█▆▇▄█▅█▆▇▆▅▅▅▄▄▅▆▅▃▃▄▄▂▄▃▂▃▂▁▂▁▁▁▂▂▂▁▂
+wandb:                                 epoch ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇██
+wandb:                            epoch_time █▆▂▆▄▂▅▅▄▆▇▆▅▁█▇▇▇▆▆
+wandb:                             test_bleu ▁
+wandb:                             test_loss ▁
+wandb:                            train_loss █▆▆▅▅▄▃▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:                            valid_bleu ▁▃▅▄▄▅▆▆▆▆▇▆▇▇▇▇▇▇██
+wandb:                            valid_loss █▇▇▆▅▄▃▃▂▂▂▂▂▂▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb: decoder.layers.0.norm1_InputAngleMean 55.86346
+wandb:  decoder.layers.0.norm1_InputAngleStd 0.15326
+wandb: decoder.layers.0.norm2_InputAngleMean 92.15536
+wandb:  decoder.layers.0.norm2_InputAngleStd 0.03388
+wandb: decoder.layers.0.norm3_InputAngleMean 93.09275
+wandb:  decoder.layers.0.norm3_InputAngleStd 0.09192
+wandb: decoder.layers.1.norm1_InputAngleMean 91.07118
+wandb:  decoder.layers.1.norm1_InputAngleStd 0.04088
+wandb: decoder.layers.1.norm2_InputAngleMean 90.95523
+wandb:  decoder.layers.1.norm2_InputAngleStd 0.04167
+wandb: decoder.layers.1.norm3_InputAngleMean 91.40607
+wandb:  decoder.layers.1.norm3_InputAngleStd 0.04426
+wandb: decoder.layers.2.norm1_InputAngleMean 90.70036
+wandb:  decoder.layers.2.norm1_InputAngleStd 0.03912
+wandb: decoder.layers.2.norm2_InputAngleMean 90.64622
+wandb:  decoder.layers.2.norm2_InputAngleStd 0.02889
+wandb: decoder.layers.2.norm3_InputAngleMean 90.82243
+wandb:  decoder.layers.2.norm3_InputAngleStd 0.03454
+wandb: decoder.layers.3.norm1_InputAngleMean 90.45912
+wandb:  decoder.layers.3.norm1_InputAngleStd 0.03728
+wandb: decoder.layers.3.norm2_InputAngleMean 90.56969
+wandb:  decoder.layers.3.norm2_InputAngleStd 0.02716
+wandb: decoder.layers.3.norm3_InputAngleMean 90.57262
+wandb:  decoder.layers.3.norm3_InputAngleStd 0.03276
+wandb: decoder.layers.4.norm1_InputAngleMean 90.39895
+wandb:  decoder.layers.4.norm1_InputAngleStd 0.06467
+wandb: decoder.layers.4.norm2_InputAngleMean 90.20895
+wandb:  decoder.layers.4.norm2_InputAngleStd 0.02591
+wandb: decoder.layers.4.norm3_InputAngleMean 90.3271
+wandb:  decoder.layers.4.norm3_InputAngleStd 0.03324
+wandb: decoder.layers.5.norm1_InputAngleMean 90.13166
+wandb:  decoder.layers.5.norm1_InputAngleStd 0.1165
+wandb: decoder.layers.5.norm2_InputAngleMean 90.05553
+wandb:  decoder.layers.5.norm2_InputAngleStd 0.13155
+wandb: decoder.layers.5.norm3_InputAngleMean 90.01426
+wandb:  decoder.layers.5.norm3_InputAngleStd 0.06561
+wandb: encoder.layers.0.norm1_InputAngleMean 53.20208
+wandb:  encoder.layers.0.norm1_InputAngleStd 0.19502
+wandb: encoder.layers.0.norm2_InputAngleMean 90.42001
+wandb:  encoder.layers.0.norm2_InputAngleStd 0.00855
+wandb: encoder.layers.1.norm1_InputAngleMean 90.27441
+wandb:  encoder.layers.1.norm1_InputAngleStd 0.00772
+wandb: encoder.layers.1.norm2_InputAngleMean 90.25995
+wandb:  encoder.layers.1.norm2_InputAngleStd 0.00896
+wandb: encoder.layers.2.norm1_InputAngleMean 90.21585
+wandb:  encoder.layers.2.norm1_InputAngleStd 0.01069
+wandb: encoder.layers.2.norm2_InputAngleMean 90.20857
+wandb:  encoder.layers.2.norm2_InputAngleStd 0.01339
+wandb: encoder.layers.3.norm1_InputAngleMean 90.18633
+wandb:  encoder.layers.3.norm1_InputAngleStd 0.01624
+wandb: encoder.layers.3.norm2_InputAngleMean 90.18411
+wandb:  encoder.layers.3.norm2_InputAngleStd 0.0195
+wandb: encoder.layers.4.norm1_InputAngleMean 90.18689
+wandb:  encoder.layers.4.norm1_InputAngleStd 0.02655
+wandb: encoder.layers.4.norm2_InputAngleMean 90.17152
+wandb:  encoder.layers.4.norm2_InputAngleStd 0.02819
+wandb: encoder.layers.5.norm1_InputAngleMean 90.25855
+wandb:  encoder.layers.5.norm1_InputAngleStd 0.05398
+wandb: encoder.layers.5.norm2_InputAngleMean 90.39543
+wandb:  encoder.layers.5.norm2_InputAngleStd 0.04026
+wandb:                                 epoch 20
+wandb:                            epoch_time 20.25543
+wandb:                             test_bleu 12.66106
+wandb:                             test_loss 4.21492
+wandb:                            train_loss 3.75731
+wandb:                            valid_bleu 20.26598
+wandb:                            valid_loss 3.67737
+wandb: 
+wandb: 🚀 View run transformer-translation_e20_b128_d512_n6_h8_f2048_LayerNorm_seed42 at: https://wandb.ai/whsjrc-buaa/transformer-translation/runs/hd6w2kob
+wandb: ⭐️ View project at: https://wandb.ai/whsjrc-buaa/transformer-translation
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250428_192722-hd6w2kob/logs
+dataset initializing start
+Failed to download Multi30k dataset, trying to load from local files...
+dataset initializing done
+使用随机种子: 42
+使用归一化层类型: LayerNorm
+dataset initializing start
+Failed to download Multi30k dataset, trying to load from local files...
+dataset initializing done
+The model has 55,205,037 trainable parameters
+step: 0, loss: 10.2009
+step: 100, loss: 5.5446
+step: 200, loss: 5.5601
+Epoch: 01 | Time: (0, 20)
+	Train Loss: 5.883 | Train PPL: 358.981
+	Val Loss: 5.344 | Val PPL: 209.341
+	Val BLEU: 0.000
+step: 0, loss: 5.4457
+step: 100, loss: 5.0921
+step: 200, loss: 5.2291
+Epoch: 02 | Time: (0, 20)
+	Train Loss: 5.316 | Train PPL: 203.467
+	Val Loss: 5.173 | Val PPL: 176.381
+	Val BLEU: 5.758
+step: 0, loss: 5.1131
+step: 100, loss: 5.0577
+step: 200, loss: 5.1594
+Epoch: 03 | Time: (0, 18)
+	Train Loss: 5.176 | Train PPL: 176.944
+	Val Loss: 5.064 | Val PPL: 158.293
+	Val BLEU: 10.374
+step: 0, loss: 5.1630
+step: 100, loss: 5.2163
+step: 200, loss: 5.4400
+Epoch: 04 | Time: (0, 20)
+	Train Loss: 5.115 | Train PPL: 166.511
+	Val Loss: 4.830 | Val PPL: 125.244
+	Val BLEU: 8.667
+step: 0, loss: 4.6201
+step: 100, loss: 5.0384
+step: 200, loss: 5.1174
+Epoch: 05 | Time: (0, 19)
+	Train Loss: 4.845 | Train PPL: 127.089
+	Val Loss: 4.708 | Val PPL: 110.856
+	Val BLEU: 9.598
+step: 0, loss: 4.7259
+step: 100, loss: 4.8450
+step: 200, loss: 4.3485
+Epoch: 06 | Time: (0, 18)
+	Train Loss: 4.625 | Train PPL: 101.977
+	Val Loss: 4.410 | Val PPL:  82.308
+	Val BLEU: 12.518
+step: 0, loss: 4.1193
+step: 100, loss: 4.1251
+step: 200, loss: 4.4672
+Epoch: 07 | Time: (0, 19)
+	Train Loss: 4.322 | Train PPL:  75.356
+	Val Loss: 4.126 | Val PPL:  61.958
+	Val BLEU: 14.528
+step: 0, loss: 4.3369
+step: 100, loss: 3.9650
+step: 200, loss: 3.7622
+Epoch: 08 | Time: (0, 19)
+	Train Loss: 4.143 | Train PPL:  62.970
+	Val Loss: 4.052 | Val PPL:  57.499
+	Val BLEU: 14.973
+step: 0, loss: 3.9234
+step: 100, loss: 3.8220
+step: 200, loss: 4.1965
+Epoch: 09 | Time: (0, 19)
+	Train Loss: 4.055 | Train PPL:  57.676
+	Val Loss: 3.939 | Val PPL:  51.370
+	Val BLEU: 15.782
+step: 0, loss: 4.2500
+step: 100, loss: 4.3526
+step: 200, loss: 3.9844
+Epoch: 10 | Time: (0, 20)
+	Train Loss: 3.995 | Train PPL:  54.353
+	Val Loss: 3.949 | Val PPL:  51.871
+	Val BLEU: 15.575
+step: 0, loss: 3.7440
+step: 100, loss: 3.4215
+step: 200, loss: 3.4476
+Epoch: 11 | Time: (0, 20)
+	Train Loss: 3.963 | Train PPL:  52.597
+	Val Loss: 3.881 | Val PPL:  48.463
+	Val BLEU: 16.646
+step: 0, loss: 3.4697
+step: 100, loss: 4.2375
+step: 200, loss: 4.3314
+Epoch: 12 | Time: (0, 20)
+	Train Loss: 3.940 | Train PPL:  51.395
+	Val Loss: 3.896 | Val PPL:  49.196
+	Val BLEU: 15.885
+step: 0, loss: 4.1245
+step: 100, loss: 4.0556
+step: 200, loss: 3.7378
+Epoch: 13 | Time: (0, 19)
+	Train Loss: 3.927 | Train PPL:  50.731
+	Val Loss: 3.881 | Val PPL:  48.487
+	Val BLEU: 16.098
+step: 0, loss: 3.7367
+step: 100, loss: 3.9450
+step: 200, loss: 3.9727
+Epoch: 14 | Time: (0, 17)
+	Train Loss: 3.891 | Train PPL:  48.981
+	Val Loss: 3.829 | Val PPL:  46.038
+	Val BLEU: 17.185
+step: 0, loss: 3.5620
+step: 100, loss: 3.7243
+step: 200, loss: 3.6392
+Epoch: 15 | Time: (0, 21)
+	Train Loss: 3.888 | Train PPL:  48.830
+	Val Loss: 3.792 | Val PPL:  44.326
+	Val BLEU: 16.359
+step: 0, loss: 3.9121
+step: 100, loss: 3.9421
+step: 200, loss: 3.9069
+Epoch: 16 | Time: (0, 20)
+	Train Loss: 3.857 | Train PPL:  47.309
+	Val Loss: 3.765 | Val PPL:  43.150
+	Val BLEU: 16.654
+step: 0, loss: 3.8074
+step: 100, loss: 3.7156
+step: 200, loss: 4.1334
+Epoch: 17 | Time: (0, 20)
+	Train Loss: 3.860 | Train PPL:  47.445
+	Val Loss: 3.794 | Val PPL:  44.423
+	Val BLEU: 16.462
+step: 0, loss: 3.6020
+step: 100, loss: 3.8325
+step: 200, loss: 4.0086
+Epoch: 18 | Time: (0, 20)
+	Train Loss: 3.828 | Train PPL:  45.982
+	Val Loss: 3.769 | Val PPL:  43.352
+	Val BLEU: 16.730
+step: 0, loss: 3.8613
+step: 100, loss: 3.6817
+step: 200, loss: 4.1669
+Epoch: 19 | Time: (0, 20)
+	Train Loss: 3.773 | Train PPL:  43.521
+	Val Loss: 3.696 | Val PPL:  40.305
+	Val BLEU: 19.895
+step: 0, loss: 3.8788
+step: 100, loss: 3.5853
+step: 200, loss: 3.7364
+Epoch: 20 | Time: (0, 20)
+	Train Loss: 3.757 | Train PPL:  42.833
+	Val Loss: 3.677 | Val PPL:  39.542
+	Val BLEU: 20.266
+| Test Loss: 4.215 | Test PPL:  67.689 | Test BLEU: 12.661 |
+LayerNorm训练完成时间: Mon Apr 28 19:34:21 CST 2025
+保存最新的LayerNorm模型文件:
+saved/model-LayerNorm-seed42-3.6774.pt
+==========================================================
+==========================================================
+开始使用RMSNorm训练模型...
+开始时间: Mon Apr 28 19:34:21 CST 2025
+==========================================================
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: uuq2024 (whsjrc-buaa) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /root/autodl-tmp/transformer-e/transformer/wandb/run-20250428_193432-uxaju16x
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run transformer-translation_e20_b128_d512_n6_h8_f2048_RMS_seed42
+wandb: ⭐️ View project at https://wandb.ai/whsjrc-buaa/transformer-translation
+wandb: 🚀 View run at https://wandb.ai/whsjrc-buaa/transformer-translation/runs/uxaju16x
+/root/autodl-tmp/transformer-e/transformer/train.py:33: UserWarning: nn.init.kaiming_uniform is now deprecated in favor of nn.init.kaiming_uniform_.
+  nn.init.kaiming_uniform(m.weight.data)
+/root/miniconda3/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "

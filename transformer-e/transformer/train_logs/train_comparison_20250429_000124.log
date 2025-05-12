@@ -1,0 +1,848 @@
+============================================================
+训练开始时间: Tue Apr 29 00:01:24 CST 2025
+随机种子: 1
+训练轮数: 80
+批次大小: 128
+模型维度: 512
+层数: 6
+注意力头数: 8
+前馈网络隐藏层维度: 2048
+初始学习率: 0.0001
+学习率调度器: transformer_warmup
+预热步数: 4000
+============================================================
+==========================================================
+开始使用LayerNorm训练模型...
+开始时间: Tue Apr 29 00:01:24 CST 2025
+==========================================================
+LayerNorm训练完成时间: Tue Apr 29 00:01:24 CST 2025
+保存最新的LayerNorm模型文件:
+==========================================================
+==========================================================
+开始使用RMSNorm训练模型...
+开始时间: Tue Apr 29 00:01:24 CST 2025
+==========================================================
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: uuq2024 (whsjrc-buaa) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /root/autodl-tmp/transformer-e/transformer/wandb/run-20250429_000137-t99de0kn
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run transformer-translation_e80_b128_d512_n6_h8_f2048_RMS_seed1_lr0.0001_transformer_warmup
+wandb: ⭐️ View project at https://wandb.ai/whsjrc-buaa/transformer-translation
+wandb: 🚀 View run at https://wandb.ai/whsjrc-buaa/transformer-translation/runs/t99de0kn
+/root/autodl-tmp/transformer-e/transformer/train.py:33: UserWarning: nn.init.kaiming_uniform is now deprecated in favor of nn.init.kaiming_uniform_.
+  nn.init.kaiming_uniform(m.weight.data)
+dataset initializing start
+Failed to download Multi30k dataset, trying to load from local files...
+dataset initializing done
+使用随机种子: 1
+使用归一化层类型: RMS
+初始学习率: 0.0001
+学习率调度器: transformer_warmup
+预热步数: 4000
+dataset initializing start
+Failed to download Multi30k dataset, trying to load from local files...
+dataset initializing done
+The model has 55,189,677 trainable parameters
+step: 0, loss: 9.9366
+step: 100, loss: 6.7319
+step: 200, loss: 5.7986
+Epoch: 01 | Time: (0, 19)
+	Train Loss: 6.897 | Train PPL: 989.781
+	Val Loss: 5.678 | Val PPL: 292.375
+	Val BLEU: 0.000
+	Learning Rate: 0.00003983
+step: 0, loss: 5.7332
+step: 100, loss: 5.6503
+step: 200, loss: 5.3378
+Epoch: 02 | Time: (0, 19)
+	Train Loss: 5.519 | Train PPL: 249.419
+	Val Loss: 5.304 | Val PPL: 201.206
+	Val BLEU: 4.966
+	Learning Rate: 0.00007949
+step: 0, loss: 5.2122
+step: 100, loss: 5.2211
+step: 200, loss: 5.1317
+Epoch: 03 | Time: (0, 19)
+	Train Loss: 5.373 | Train PPL: 215.411
+	Val Loss: 5.253 | Val PPL: 191.221
+	Val BLEU: 7.480
+	Learning Rate: 0.00011914
+step: 0, loss: 5.2354
+step: 100, loss: 5.2755
+step: 200, loss: 5.9690
+Epoch: 04 | Time: (0, 18)
+	Train Loss: 5.257 | Train PPL: 191.906
+	Val Loss: 5.274 | Val PPL: 195.147
+	Val BLEU: 8.944
+	Learning Rate: 0.00015880
+step: 0, loss: 5.2129
+step: 100, loss: 5.1902
+step: 200, loss: 5.0174
+Epoch: 05 | Time: (0, 19)
+	Train Loss: 5.235 | Train PPL: 187.642
+	Val Loss: 5.065 | Val PPL: 158.449
+	Val BLEU: 3.980
+	Learning Rate: 0.00019845
+step: 0, loss: 5.3342
+step: 100, loss: 5.2160
+step: 200, loss: 5.0224
+Epoch: 06 | Time: (0, 19)
+	Train Loss: 5.179 | Train PPL: 177.423
+	Val Loss: 5.070 | Val PPL: 159.175
+	Val BLEU: 7.200
+	Learning Rate: 0.00023811
+step: 0, loss: 5.0736
+step: 100, loss: 5.4688
+step: 200, loss: 4.7993
+Epoch: 07 | Time: (0, 19)
+	Train Loss: 5.173 | Train PPL: 176.511
+	Val Loss: 5.099 | Val PPL: 163.845
+	Val BLEU: 0.000
+	Learning Rate: 0.00027776
+step: 0, loss: 5.3219
+step: 100, loss: 4.9458
+step: 200, loss: 5.7587
+Epoch: 08 | Time: (0, 19)
+	Train Loss: 5.117 | Train PPL: 166.914
+	Val Loss: 5.007 | Val PPL: 149.400
+	Val BLEU: 5.687
+	Learning Rate: 0.00031742
+step: 0, loss: 5.1934
+step: 100, loss: 4.9566
+step: 200, loss: 5.0260
+Epoch: 09 | Time: (0, 18)
+	Train Loss: 5.046 | Train PPL: 155.379
+	Val Loss: 4.917 | Val PPL: 136.588
+	Val BLEU: 8.986
+	Learning Rate: 0.00035707
+step: 0, loss: 5.0483
+step: 100, loss: 4.6817
+step: 200, loss: 4.8475
+Epoch: 10 | Time: (0, 19)
+	Train Loss: 4.917 | Train PPL: 136.564
+	Val Loss: 4.756 | Val PPL: 116.235
+	Val BLEU: 10.306
+	Learning Rate: 0.00039673
+step: 0, loss: 4.6264
+step: 100, loss: 4.8178
+step: 200, loss: 4.7099
+Epoch: 11 | Time: (0, 19)
+	Train Loss: 4.700 | Train PPL: 109.927
+	Val Loss: 4.548 | Val PPL:  94.440
+	Val BLEU: 9.419
+	Learning Rate: 0.00043638
+step: 0, loss: 4.0821
+step: 100, loss: 4.0084
+step: 200, loss: 4.1034
+Epoch: 12 | Time: (0, 19)
+	Train Loss: 4.190 | Train PPL:  65.991
+	Val Loss: 3.967 | Val PPL:  52.807
+	Val BLEU: 15.433
+	Learning Rate: 0.00047604
+step: 0, loss: 4.2723
+step: 100, loss: 3.9267
+step: 200, loss: 3.8048
+Epoch: 13 | Time: (0, 19)
+	Train Loss: 3.895 | Train PPL:  49.169
+	Val Loss: 3.738 | Val PPL:  42.017
+	Val BLEU: 17.177
+	Learning Rate: 0.00051569
+step: 0, loss: 3.8588
+step: 100, loss: 3.7439
+step: 200, loss: 3.8718
+Epoch: 14 | Time: (0, 19)
+	Train Loss: 3.756 | Train PPL:  42.788
+	Val Loss: 3.644 | Val PPL:  38.250
+	Val BLEU: 18.413
+	Learning Rate: 0.00055535
+step: 0, loss: 3.6928
+step: 100, loss: 3.5511
+step: 200, loss: 3.6845
+Epoch: 15 | Time: (0, 19)
+	Train Loss: 3.675 | Train PPL:  39.468
+	Val Loss: 3.577 | Val PPL:  35.766
+	Val BLEU: 18.658
+	Learning Rate: 0.00059500
+step: 0, loss: 3.6696
+step: 100, loss: 3.4125
+step: 200, loss: 3.5711
+Epoch: 16 | Time: (0, 18)
+	Train Loss: 3.643 | Train PPL:  38.200
+	Val Loss: 3.509 | Val PPL:  33.414
+	Val BLEU: 20.542
+	Learning Rate: 0.00063466
+step: 0, loss: 3.5315
+step: 100, loss: 3.5034
+step: 200, loss: 3.5387
+Epoch: 17 | Time: (0, 19)
+	Train Loss: 3.580 | Train PPL:  35.868
+	Val Loss: 3.496 | Val PPL:  32.972
+	Val BLEU: 20.422
+	Learning Rate: 0.00067431
+step: 0, loss: 3.6506
+step: 100, loss: 3.3337
+step: 200, loss: 3.7697
+Epoch: 18 | Time: (0, 19)
+	Train Loss: 3.548 | Train PPL:  34.750
+	Val Loss: 3.459 | Val PPL:  31.798
+	Val BLEU: 20.613
+	Learning Rate: 0.00069129
+step: 0, loss: 3.5194
+step: 100, loss: 3.7135
+step: 200, loss: 3.3635
+Epoch: 19 | Time: (0, 19)
+	Train Loss: 3.497 | Train PPL:  33.024
+	Val Loss: 3.381 | Val PPL:  29.415
+	Val BLEU: 22.668
+	Learning Rate: 0.00067286
+step: 0, loss: 3.3010
+step: 100, loss: 4.2093
+step: 200, loss: 3.6544
+Epoch: 20 | Time: (0, 19)
+	Train Loss: 3.433 | Train PPL:  30.972
+	Val Loss: 3.384 | Val PPL:  29.483
+	Val BLEU: 22.412
+	Learning Rate: 0.00065583
+step: 0, loss: 3.2490
+step: 100, loss: 3.0436
+step: 200, loss: 3.4144
+Epoch: 21 | Time: (0, 19)
+	Train Loss: 3.394 | Train PPL:  29.789
+	Val Loss: 3.306 | Val PPL:  27.264
+	Val BLEU: 22.308
+	Learning Rate: 0.00064002
+step: 0, loss: 3.2289
+step: 100, loss: 3.5520
+step: 200, loss: 3.0962
+Epoch: 22 | Time: (0, 19)
+	Train Loss: 3.357 | Train PPL:  28.691
+	Val Loss: 3.279 | Val PPL:  26.544
+	Val BLEU: 22.960
+	Learning Rate: 0.00062531
+step: 0, loss: 3.3164
+step: 100, loss: 3.2277
+step: 200, loss: 3.0228
+Epoch: 23 | Time: (0, 19)
+	Train Loss: 3.325 | Train PPL:  27.801
+	Val Loss: 3.257 | Val PPL:  25.972
+	Val BLEU: 23.578
+	Learning Rate: 0.00061157
+step: 0, loss: 2.8608
+step: 100, loss: 4.1285
+step: 200, loss: 2.9641
+Epoch: 24 | Time: (0, 19)
+	Train Loss: 3.296 | Train PPL:  27.002
+	Val Loss: 3.245 | Val PPL:  25.649
+	Val BLEU: 21.532
+	Learning Rate: 0.00059870
+step: 0, loss: 3.6699
+step: 100, loss: 3.2864
+step: 200, loss: 3.1679
+Epoch: 25 | Time: (0, 19)
+	Train Loss: 3.267 | Train PPL:  26.220
+	Val Loss: 3.229 | Val PPL:  25.263
+	Val BLEU: 23.949
+	Learning Rate: 0.00058660
+step: 0, loss: 3.3329
+step: 100, loss: 3.8086
+step: 200, loss: 3.2636
+Epoch: 26 | Time: (0, 19)
+	Train Loss: 3.248 | Train PPL:  25.749
+	Val Loss: 3.214 | Val PPL:  24.879
+	Val BLEU: 22.944
+	Learning Rate: 0.00057521
+step: 0, loss: 3.0232
+step: 100, loss: 3.7905
+step: 200, loss: 3.4749
+Epoch: 27 | Time: (0, 19)
+	Train Loss: 3.239 | Train PPL:  25.513
+	Val Loss: 3.200 | Val PPL:  24.532
+	Val BLEU: 22.155
+	Learning Rate: 0.00056446
+step: 0, loss: 3.1704
+step: 100, loss: 3.2859
+step: 200, loss: 3.2248
+Epoch: 28 | Time: (0, 19)
+	Train Loss: 3.231 | Train PPL:  25.310
+	Val Loss: 3.185 | Val PPL:  24.168
+	Val BLEU: 23.307
+	Learning Rate: 0.00055429
+step: 0, loss: 3.5353
+step: 100, loss: 3.0204
+step: 200, loss: 3.2293
+Epoch: 29 | Time: (0, 20)
+	Train Loss: 3.220 | Train PPL:  25.034
+	Val Loss: 3.172 | Val PPL:  23.850
+	Val BLEU: 23.151
+	Learning Rate: 0.00054465
+step: 0, loss: 3.2648
+step: 100, loss: 3.3738
+step: 200, loss: 3.2994
+Epoch: 30 | Time: (0, 19)
+	Train Loss: 3.200 | Train PPL:  24.542
+	Val Loss: 3.180 | Val PPL:  24.049
+	Val BLEU: 24.377
+	Learning Rate: 0.00053550
+step: 0, loss: 2.8972
+step: 100, loss: 3.1305
+step: 200, loss: 3.0761
+Epoch: 31 | Time: (0, 19)
+	Train Loss: 3.176 | Train PPL:  23.954
+	Val Loss: 3.128 | Val PPL:  22.837
+	Val BLEU: 24.693
+	Learning Rate: 0.00052679
+step: 0, loss: 2.9569
+step: 100, loss: 3.2207
+step: 200, loss: 2.9671
+Epoch: 32 | Time: (0, 19)
+	Train Loss: 3.153 | Train PPL:  23.404
+	Val Loss: 3.099 | Val PPL:  22.185
+	Val BLEU: 23.944
+	Learning Rate: 0.00051850
+step: 0, loss: 2.6211
+step: 100, loss: 2.8896
+step: 200, loss: 3.3509
+Epoch: 33 | Time: (0, 13)
+	Train Loss: 3.138 | Train PPL:  23.049
+	Val Loss: 3.096 | Val PPL:  22.101
+	Val BLEU: 25.157
+	Learning Rate: 0.00051058
+step: 0, loss: 2.9087
+step: 100, loss: 3.5293
+step: 200, loss: 3.3970
+Epoch: 34 | Time: (0, 15)
+	Train Loss: 3.136 | Train PPL:  23.003
+	Val Loss: 3.123 | Val PPL:  22.704
+	Val BLEU: 24.104
+	Learning Rate: 0.00050302
+step: 0, loss: 3.4995
+step: 100, loss: 3.1022
+step: 200, loss: 2.9699
+Epoch: 35 | Time: (0, 19)
+	Train Loss: 3.139 | Train PPL:  23.070
+	Val Loss: 3.123 | Val PPL:  22.725
+	Val BLEU: 25.499
+	Learning Rate: 0.00049578
+step: 0, loss: 2.9292
+step: 100, loss: 3.0639
+step: 200, loss: 2.9981
+Epoch: 36 | Time: (0, 19)
+	Train Loss: 3.131 | Train PPL:  22.903
+	Val Loss: 3.130 | Val PPL:  22.872
+	Val BLEU: 24.430
+	Learning Rate: 0.00048885
+step: 0, loss: 3.0448
+step: 100, loss: 3.4357
+step: 200, loss: 3.1680
+Epoch: 37 | Time: (0, 19)
+	Train Loss: 3.129 | Train PPL:  22.847
+	Val Loss: 3.083 | Val PPL:  21.826
+	Val BLEU: 25.240
+	Learning Rate: 0.00048220
+step: 0, loss: 3.1452
+step: 100, loss: 3.4856
+step: 200, loss: 2.9623
+Epoch: 38 | Time: (0, 19)
+	Train Loss: 3.125 | Train PPL:  22.765
+	Val Loss: 3.098 | Val PPL:  22.153
+	Val BLEU: 25.183
+	Learning Rate: 0.00047581
+step: 0, loss: 3.0083
+step: 100, loss: 3.2631
+step: 200, loss: 2.9238
+Epoch: 39 | Time: (0, 19)
+	Train Loss: 3.128 | Train PPL:  22.838
+	Val Loss: 3.081 | Val PPL:  21.780
+	Val BLEU: 24.997
+	Learning Rate: 0.00046967
+step: 0, loss: 2.8972
+step: 100, loss: 2.9781
+step: 200, loss: 3.0134
+Epoch: 40 | Time: (0, 19)
+	Train Loss: 3.128 | Train PPL:  22.823
+	Val Loss: 3.090 | Val PPL:  21.973
+	Val BLEU: 25.366
+	Learning Rate: 0.00046377
+step: 0, loss: 2.9547
+step: 100, loss: 3.1471
+step: 200, loss: 3.1426
+Epoch: 41 | Time: (0, 17)
+	Train Loss: 3.118 | Train PPL:  22.612
+	Val Loss: 3.074 | Val PPL:  21.624
+	Val BLEU: 25.295
+	Learning Rate: 0.00045808
+step: 0, loss: 3.4124
+step: 100, loss: 3.4435
+step: 200, loss: 3.1992
+Epoch: 42 | Time: (0, 18)
+	Train Loss: 3.137 | Train PPL:  23.032
+	Val Loss: 3.094 | Val PPL:  22.075
+	Val BLEU: 25.415
+	Learning Rate: 0.00045259
+step: 0, loss: 3.2030
+step: 100, loss: 3.2023
+step: 200, loss: 3.3755
+Epoch: 43 | Time: (0, 19)
+	Train Loss: 3.125 | Train PPL:  22.751
+	Val Loss: 3.070 | Val PPL:  21.542
+	Val BLEU: 24.628
+	Learning Rate: 0.00044730
+step: 0, loss: 3.0214
+step: 100, loss: 3.1013
+step: 200, loss: 3.1092
+Epoch: 44 | Time: (0, 18)
+	Train Loss: 3.121 | Train PPL:  22.663
+	Val Loss: 3.067 | Val PPL:  21.483
+	Val BLEU: 25.551
+	Learning Rate: 0.00044219
+step: 0, loss: 2.9706
+step: 100, loss: 2.9074
+step: 200, loss: 2.8938
+Epoch: 45 | Time: (0, 19)
+	Train Loss: 3.121 | Train PPL:  22.663
+	Val Loss: 3.073 | Val PPL:  21.611
+	Val BLEU: 25.788
+	Learning Rate: 0.00043724
+step: 0, loss: 2.9673
+step: 100, loss: 3.0422
+step: 200, loss: 3.8179
+Epoch: 46 | Time: (0, 19)
+	Train Loss: 3.116 | Train PPL:  22.566
+	Val Loss: 3.084 | Val PPL:  21.844
+	Val BLEU: 24.823
+	Learning Rate: 0.00043247
+step: 0, loss: 3.1647
+step: 100, loss: 2.8348
+step: 200, loss: 3.1236
+Epoch: 47 | Time: (0, 19)
+	Train Loss: 3.118 | Train PPL:  22.602
+	Val Loss: 3.067 | Val PPL:  21.486
+	Val BLEU: 25.135
+	Learning Rate: 0.00042784
+step: 0, loss: 3.3078
+step: 100, loss: 3.1020
+step: 200, loss: 3.4280
+Epoch: 48 | Time: (0, 19)
+	Train Loss: 3.121 | Train PPL:  22.676
+	Val Loss: 3.071 | Val PPL:  21.574
+	Val BLEU: 25.120
+	Learning Rate: 0.00042336
+step: 0, loss: 2.7758
+step: 100, loss: 3.1252
+step: 200, loss: 2.7898
+Epoch: 49 | Time: (0, 19)
+	Train Loss: 3.114 | Train PPL:  22.510
+	Val Loss: 3.084 | Val PPL:  21.835
+	Val BLEU: 25.443
+	Learning Rate: 0.00041902
+step: 0, loss: 2.9331
+step: 100, loss: 2.8465
+step: 200, loss: 2.7793
+Epoch: 50 | Time: (0, 19)
+	Train Loss: 3.112 | Train PPL:  22.468
+	Val Loss: 3.076 | Val PPL:  21.661
+	Val BLEU: 26.357
+	Learning Rate: 0.00041481
+step: 0, loss: 3.0797
+step: 100, loss: 2.9646
+step: 200, loss: 3.0503
+Epoch: 51 | Time: (0, 19)
+	Train Loss: 3.115 | Train PPL:  22.530
+	Val Loss: 3.064 | Val PPL:  21.421
+	Val BLEU: 26.218
+	Learning Rate: 0.00041072
+step: 0, loss: 2.9944
+step: 100, loss: 2.8843
+step: 200, loss: 3.2976
+Epoch: 52 | Time: (0, 19)
+	Train Loss: 3.112 | Train PPL:  22.466
+	Val Loss: 3.060 | Val PPL:  21.326
+	Val BLEU: 25.874
+	Learning Rate: 0.00040675
+step: 0, loss: 3.3123
+step: 100, loss: 3.3681
+step: 200, loss: 3.0600
+Epoch: 53 | Time: (0, 19)
+	Train Loss: 3.112 | Train PPL:  22.466
+	Val Loss: 3.073 | Val PPL:  21.605
+	Val BLEU: 25.492
+	Learning Rate: 0.00040290
+step: 0, loss: 3.0804
+step: 100, loss: 2.6906
+step: 200, loss: 2.7759
+Epoch: 54 | Time: (0, 19)
+	Train Loss: 3.118 | Train PPL:  22.602
+	Val Loss: 3.061 | Val PPL:  21.342
+	Val BLEU: 24.357
+	Learning Rate: 0.00039915
+step: 0, loss: 3.2599
+step: 100, loss: 3.2955
+step: 200, loss: 3.5592
+Epoch: 55 | Time: (0, 19)
+	Train Loss: 3.121 | Train PPL:  22.666
+	Val Loss: 3.060 | Val PPL:  21.327
+	Val BLEU: 25.171
+	Learning Rate: 0.00039551
+step: 0, loss: 3.0823
+step: 100, loss: 3.2936
+step: 200, loss: 3.7040
+Epoch: 56 | Time: (0, 19)
+	Train Loss: 3.120 | Train PPL:  22.647
+	Val Loss: 3.058 | Val PPL:  21.287
+	Val BLEU: 26.199
+	Learning Rate: 0.00039196
+step: 0, loss: 3.1278
+step: 100, loss: 2.7906
+step: 200, loss: 2.9662
+Epoch: 57 | Time: (0, 18)
+	Train Loss: 3.121 | Train PPL:  22.677
+	Val Loss: 3.063 | Val PPL:  21.386
+	Val BLEU: 25.319
+	Learning Rate: 0.00038851
+step: 0, loss: 3.3876
+step: 100, loss: 3.1146
+step: 200, loss: 3.2399
+Epoch: 58 | Time: (0, 19)
+	Train Loss: 3.122 | Train PPL:  22.701
+	Val Loss: 3.078 | Val PPL:  21.725
+	Val BLEU: 25.736
+	Learning Rate: 0.00038514
+step: 0, loss: 2.9947
+step: 100, loss: 3.0330
+step: 200, loss: 3.0722
+Epoch: 59 | Time: (0, 19)
+	Train Loss: 3.126 | Train PPL:  22.782
+	Val Loss: 3.091 | Val PPL:  22.000
+	Val BLEU: 25.309
+	Learning Rate: 0.00038187
+step: 0, loss: 3.2157
+step: 100, loss: 3.3073
+step: 200, loss: 3.4450
+Epoch: 60 | Time: (0, 19)
+	Train Loss: 3.129 | Train PPL:  22.846
+	Val Loss: 3.065 | Val PPL:  21.443
+	Val BLEU: 25.463
+	Learning Rate: 0.00037867
+step: 0, loss: 3.1263
+step: 100, loss: 3.1938
+step: 200, loss: 3.2568
+Epoch: 61 | Time: (0, 19)
+	Train Loss: 3.133 | Train PPL:  22.942
+	Val Loss: 3.068 | Val PPL:  21.510
+	Val BLEU: 25.499
+	Learning Rate: 0.00037555
+step: 0, loss: 3.4372
+step: 100, loss: 3.1299
+step: 200, loss: 3.7857
+Epoch: 62 | Time: (0, 19)
+	Train Loss: 3.132 | Train PPL:  22.917
+	Val Loss: 3.070 | Val PPL:  21.538
+	Val BLEU: 24.583
+	Learning Rate: 0.00037251
+step: 0, loss: 3.2591
+step: 100, loss: 2.9827
+step: 200, loss: 3.0030
+Epoch: 63 | Time: (0, 19)
+	Train Loss: 3.140 | Train PPL:  23.099
+	Val Loss: 3.079 | Val PPL:  21.743
+	Val BLEU: 25.340
+	Learning Rate: 0.00036954
+step: 0, loss: 2.8009
+step: 100, loss: 2.9643
+step: 200, loss: 3.0493
+Epoch: 64 | Time: (0, 19)
+	Train Loss: 3.141 | Train PPL:  23.122
+	Val Loss: 3.083 | Val PPL:  21.819
+	Val BLEU: 26.196
+	Learning Rate: 0.00036665
+step: 0, loss: 3.0373
+step: 100, loss: 3.4497
+step: 200, loss: 3.5695
+Epoch: 65 | Time: (0, 20)
+	Train Loss: 3.142 | Train PPL:  23.153
+	Val Loss: 3.125 | Val PPL:  22.760
+	Val BLEU: 25.530
+	Learning Rate: 0.00036382
+step: 0, loss: 3.0272
+step: 100, loss: 3.4446
+step: 200, loss: 2.7939
+Epoch: 66 | Time: (0, 19)
+	Train Loss: 3.145 | Train PPL:  23.211
+	Val Loss: 3.103 | Val PPL:  22.263
+	Val BLEU: 25.363
+	Learning Rate: 0.00036105
+step: 0, loss: 3.1754
+step: 100, loss: 2.9374
+step: 200, loss: 2.8571
+Epoch: 67 | Time: (0, 18)
+	Train Loss: 3.148 | Train PPL:  23.297
+	Val Loss: 3.083 | Val PPL:  21.826
+	Val BLEU: 26.206
+	Learning Rate: 0.00035834
+step: 0, loss: 3.1232
+step: 100, loss: 2.9302
+step: 200, loss: 3.0756
+Epoch: 68 | Time: (0, 20)
+	Train Loss: 3.148 | Train PPL:  23.295
+	Val Loss: 3.098 | Val PPL:  22.143
+	Val BLEU: 26.142
+	Learning Rate: 0.00035570
+step: 0, loss: 2.9760
+step: 100, loss: 2.8294
+step: 200, loss: 2.9947
+Epoch: 69 | Time: (0, 19)
+	Train Loss: 3.151 | Train PPL:  23.360
+	Val Loss: 3.089 | Val PPL:  21.949
+	Val BLEU: 26.471
+	Learning Rate: 0.00035311
+step: 0, loss: 2.8626
+step: 100, loss: 3.2728
+step: 200, loss: 3.2539
+Epoch: 70 | Time: (0, 19)
+	Train Loss: 3.157 | Train PPL:  23.491
+	Val Loss: 3.088 | Val PPL:  21.925
+	Val BLEU: 25.812
+	Learning Rate: 0.00035058
+step: 0, loss: 3.3753
+step: 100, loss: 3.6234
+step: 200, loss: 2.9772
+Epoch: 71 | Time: (0, 20)
+	Train Loss: 3.160 | Train PPL:  23.582
+	Val Loss: 3.092 | Val PPL:  22.023
+	Val BLEU: 25.098
+	Learning Rate: 0.00034810
+step: 0, loss: 2.9110
+step: 100, loss: 3.1964
+step: 200, loss: 3.2270
+Epoch: 72 | Time: (0, 19)
+	Train Loss: 3.164 | Train PPL:  23.665
+	Val Loss: 3.094 | Val PPL:  22.061
+	Val BLEU: 25.713
+	Learning Rate: 0.00034568
+step: 0, loss: 3.7276
+step: 100, loss: 3.2297
+step: 200, loss: 3.2248
+Epoch: 73 | Time: (0, 19)
+	Train Loss: 3.166 | Train PPL:  23.708
+	Val Loss: 3.088 | Val PPL:  21.928
+	Val BLEU: 25.098
+	Learning Rate: 0.00034330
+step: 0, loss: 3.2932
+step: 100, loss: 3.1735
+step: 200, loss: 3.3595
+Epoch: 74 | Time: (0, 19)
+wandb: updating run config
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading output.log
+wandb: uploading history steps 18209-18240, summary, console lines 645-651
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb: decoder.layers.0.norm1_InputAngleMean █▇▆▆▇▇▆▅▄▃▂▃▃▂▂▁▁▁▁▁▁▁▂▁▂▁▁▁▁▂▂▂▂▁▂▂▁▂▁▂
+wandb:  decoder.layers.0.norm1_InputAngleStd ▄▄▄▃▄▃▃▄▃▇▅▇█▇▂▂▁▂▂▂▂▂▂▂▂▂▁▁▂▂▂▁▁▂▂▂▂▂▂▁
+wandb: decoder.layers.0.norm2_InputAngleMean ▆▅▆▆▄▂▂▂▁▁▃▄▅▇▇▇▇▇▇▇█▇█▇▇███████████████
+wandb:  decoder.layers.0.norm2_InputAngleStd ▆▅█▅▆▆▅▅▃▃▃▃▃▃▂▂▂▂▂▂▁▂▂▂▂▁▂▂▂▂▂▁▁▁▂▁▁▁▁▁
+wandb: decoder.layers.0.norm3_InputAngleMean █▆▅▇▇█▃▁▃▂▅▅▆▆▆▆▆▆▆▆▇▆▆▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+wandb:  decoder.layers.0.norm3_InputAngleStd ▂▂▂▂▂▇█▆▄▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: decoder.layers.1.norm1_InputAngleMean █▅▆▂▁▅▆▆▅▆▅▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+wandb:  decoder.layers.1.norm1_InputAngleStd ▄▃▃▂▁▂▃▃██▂▂▂▂▁▂▁▁▂▁▂▂▂▂▂▁▂▃▂▁▃▂▂▂▂▂▂▂▂▂
+wandb: decoder.layers.1.norm2_InputAngleMean █▇▆▁▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.1.norm2_InputAngleStd ▂▂▂▁▁▁▁▂▂█▆▄▄▂▁▂▁▂▂▂▂▁▂▂▂▁▃▁▂▁▁▂▂▁▂▁▁▂▂▂
+wandb: decoder.layers.1.norm3_InputAngleMean ▆▆█▇▂▂▂▁▁▁▄▅▄▄▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.1.norm3_InputAngleStd ▃▄▁▂▂█▆▅▃▃▂▃▃▂▃▃▄▄▃▃▂▃▃▃▂▃▃▃▂▂▃▂▃▂▁▂▂▃▁▂
+wandb: decoder.layers.2.norm1_InputAngleMean ██▆▁▁▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.2.norm1_InputAngleStd ▄▂▁▇▂█▅▄▃▃▂▂▂▂▂▂▃▂▃▂▂▃▂▂▃▂▁▂▂▁▂▃▂▂▂▁▂▁▂▂
+wandb: decoder.layers.2.norm2_InputAngleMean ▇▇▇▇█▆▆█▁▄▄▅▅▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
+wandb:  decoder.layers.2.norm2_InputAngleStd ▄▂▁▁▃▂▄██▄▄▄▂▃▃▄▃▃▄▂▄▃▃▂▂▃▄▃▄▄▃▂▃▃▃▂▂▂▃▂
+wandb: decoder.layers.2.norm3_InputAngleMean █▇▆▁▁▁▁▁▁▁▁▁▂▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+wandb:  decoder.layers.2.norm3_InputAngleStd ▁▁▁▂▄█▆▄▄▄▃▃▄▃▅▃▄▄▄▂▂▃▂▃▃▄▂▃▄▂▄▃▄▄▂▃▃▂▂▃
+wandb: decoder.layers.3.norm1_InputAngleMean █▇▆▄▁▂▃▃▃▄▄▄▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▅▅▅
+wandb:  decoder.layers.3.norm1_InputAngleStd ▄▃▂▁▁▄█▆▆▆▃▂▃▃▃▄▃▄▃▃▃▄▄▄▄▃▄▃▃▃▂▄▃▃▃▃▃▃▃▄
+wandb: decoder.layers.3.norm2_InputAngleMean █▇▁▂▂▅▆▅▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.3.norm2_InputAngleStd ▆▅▅▅▂▂▂▁▃▁▁▂▆▆▇▇▆▆▇▆▄▅▆▇▆▆▇▅▄▄▆▆█▆▆▆▇▆█▅
+wandb: decoder.layers.3.norm3_InputAngleMean ▆▇▆▆█▁▃▆▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▄▅▅▅▄▅▅▄▅▅▅▅▅▅▅
+wandb:  decoder.layers.3.norm3_InputAngleStd ▆▃▄▂▁▁▂▅▅▃▄▆▄▄▅▄▅▆▄▄▅▅▄▃▅▄▄▃▃▅▄▃▅▆▅▄▅▅█▅
+wandb: decoder.layers.4.norm1_InputAngleMean ▆█▆██▇▅▁▆▅▆▆▆▆▆▆▆▆▆▆▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▄
+wandb:  decoder.layers.4.norm1_InputAngleStd ▃▁▁▁▁▂▆█▅▄▄▃▂▃▂▃▃▃▃▃▃▂▄▄▄▂▄▄▃▄▄▄▄▄▃▄▄▅▅▅
+wandb: decoder.layers.4.norm2_InputAngleMean ██▄▁▁▆▆▆▅▅▇▆▆▆▇▇▇▇▆▆▆▇▆▇▆▆▇▆▆▇▆▆▆▆▆▆▆▆▆▆
+wandb:  decoder.layers.4.norm2_InputAngleStd █▂▃▂▁▇▆▄▅▄▄▄▂▅▄▄▃▄▃▄▂▅▃▄▄▅▄▆▄▄▃▅▄▄▄▅▄▄▅▆
+wandb: decoder.layers.4.norm3_InputAngleMean ▆▃▃▃▄▄▁▄▄▄▆▅▇█▇█▇█▆▇▅▇▅█▆▄▆▅▇▅▇▆▆▄▅▆▆▆▇▆
+wandb:  decoder.layers.4.norm3_InputAngleStd ▂▂▁▂▅█▆▆▆▃▄▄▃▃▂▃▃▃▃▃▃▃▄▃▃▃▃▃▃▄▄▄▄▃▄▄▄▄▄▄
+wandb: decoder.layers.5.norm1_InputAngleMean █▅▆▄▃▃▁▃▃▄▆▆█▇▇█▇▆▆▆▅▆▅▆▃▄▆▄▄▃▆▃▄▃▃▅▃▃▄▃
+wandb:  decoder.layers.5.norm1_InputAngleStd █▃▂▂▁▇▆▆▅▄▃▄▃▂▃▂▃▂▂▃▃▃▃▃▃▄▃▃▃▃▃▃▃▃▃▃▄▄▄▄
+wandb: decoder.layers.5.norm2_InputAngleMean █▆▅▆▃▃▄▁▁▁▁▂▂▂▃▁▃▄▃▃▄▃▃▄▄▃▃▃▃▃▃▃▂▃▃▃▂▂▂▃
+wandb:  decoder.layers.5.norm2_InputAngleStd ▃▂▃▁▁▂▁▁▇▇█▆▇▇▇▅▆▆▇▄▅▅▅▄▅▅▄▃▄▅▄▅▄▄▄▄▄▄▃▄
+wandb: decoder.layers.5.norm3_InputAngleMean ▂█▇▇▅▆▆▂▃▁▃▂▃▁▅▃▃▃▂▄▃▃▆▄▄▂▅▅▃▆▅▄▅▄▄▄▄▄▅▄
+wandb:  decoder.layers.5.norm3_InputAngleStd ▂▁▁▁▁▂▁▁▅▅▅▆▆▅▇▆▆▆▆▆▆▆▆▆█▆▇▇▇█▆▇█▇▇▇▆█▇▇
+wandb: encoder.layers.0.norm1_InputAngleMean ██▇▇▇▅▆▂▂▂▂▂▂▁▁▂▂▂▂▂▁▂▁▁▁▁▁▁▂▁▂▁▁▂▁▁▁▂▂▂
+wandb:  encoder.layers.0.norm1_InputAngleStd ▇▇▅█▇▅▂▂▂▂▂▂▃▂▄▂▁▂▂▁▂▂▂▂▂▂▁▂▂▂▃▃▁▂▃▃▂▂▂▂
+wandb: encoder.layers.0.norm2_InputAngleMean ▆▆▄▄▃▁▁▁▁▆▆▆▇▇▇█▆▇█▇█▇▆▇▇▇█▇▇▇█▇██▆██▆▇▇
+wandb:  encoder.layers.0.norm2_InputAngleStd ▆▆▅█▆▃▄▄▄▄▆▄▆▆▄▃▂▂▂▂▃▂▃▂▃▄▃▃▃▁▃▃▃▃▃▃▃▃▂▃
+wandb: encoder.layers.1.norm1_InputAngleMean ▇▅▅▃▁▁▃▄▃▆███████▇███▇██▇▇▇▇██▇█▇▇███▇██
+wandb:  encoder.layers.1.norm1_InputAngleStd █▃▃▃▆▅▅▆▅▄▇▆▁▂▂▁▃▃▃▃▂▂▁▃▂▂▁▂▃▂▂▂▂▂▃▂▃▃▃▂
+wandb: encoder.layers.1.norm2_InputAngleMean ▇█▇▇▇▁▂▃▇▇▇█▇███████▇███▇▇▇█▇█▇███▇▇███▇
+wandb:  encoder.layers.1.norm2_InputAngleStd █▇▄▄▃▃▅▅▇▅▆▄▁▂▂▂▂▄▃▂▁▁▃▁▁▃▂▃▁▂▂▂▁▂▃▂▃▃▂▂
+wandb: encoder.layers.2.norm1_InputAngleMean ▇▇▇▇▅▁▃▅▆▆▇████████▇▇██████████▇▇███▇███
+wandb:  encoder.layers.2.norm1_InputAngleStd █▄▄▅▅▅▄▇▄▃▂▁▁▂▂▂▃▂▂▄▃▄▃▄▃▃▄▃▄▃▃▂▃▂▄▄▂▃▃▃
+wandb: encoder.layers.2.norm2_InputAngleMean ███▇█▄▂▁▂▁▆▇█▇███▇████▇█▇▇██▇███▇██▇██▇▇
+wandb:  encoder.layers.2.norm2_InputAngleStd ▆▄▂▄▅█▃▃▂▁▁▁▁▁▂▂▅▂▄▄▃▃▆▆▃▅▄▅▄▆▄▅▄▃▄▆▆▄▆▆
+wandb: encoder.layers.3.norm1_InputAngleMean █▇▅▇▁▃▅█████▇███████▇████████▇██████▇███
+wandb:  encoder.layers.3.norm1_InputAngleStd ██▇▃▃▆▃▁▁▃▂▃▃▃▄▂▃▂▃▃▂▄▃▃▃▃▄▃▄▂▄▂▄▂▄▃▄▄▄▂
+wandb: encoder.layers.3.norm2_InputAngleMean ▆▆▆▂▄▁▃▃▅██▇▇███▇█▇██▇█▇▇▇▇▇█████▇▇▇▇▇▇▇
+wandb:  encoder.layers.3.norm2_InputAngleStd ▄▃▄█▅▄▂▂▁▁▂▁▁▂▁▂▂▃▄▃▄▅▃▄▅▅▄▄▅▄▅▄▃▅▅▄▃▃▅▄
+wandb: encoder.layers.4.norm1_InputAngleMean ▇▇▇▇▁▅▇█████▇███▇██████▇▇██▇██▇▇▇▇██▇█▇█
+wandb:  encoder.layers.4.norm1_InputAngleStd ▇▅▂▅█▆▅▅▁▂▁▃▂▃▃▃▂▅▃▄▃▃▄▃▄▃▄▃▄▄▅▄▄▃▄▄▃▄▄▅
+wandb: encoder.layers.4.norm2_InputAngleMean ▇▆▆▇▅▅▆▃▂▁▇▇█▇█▇██▇▇███▇▇█▇▇▇█▇▇▇█▇▇█▇▇▇
+wandb:  encoder.layers.4.norm2_InputAngleStd █▅▄▄▅▆▃▂▁▁▁▁▂▁▃▂▂▂▆▄▄▃▃▃▃▃▄▃▄▃▄▃▄▅▄▃▃▄▄▄
+wandb: encoder.layers.5.norm1_InputAngleMean █▇▇█▅▃▄▁▆▇▆▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▆█▇▆█▇█▆▆▇▆▆▆▇
+wandb:  encoder.layers.5.norm1_InputAngleStd █▄▂▂▂▂▂▂▂▂▃▂▁▁▁▁▁▁▁▂▁▂▁▁▂▂▂▂▂▂▁▂▂▂▂▂▂▂▂▂
+wandb: encoder.layers.5.norm2_InputAngleMean ▇▇▇▃▅█▅▂▄▆▅▇▇█▃▆▆▅▅▇▆▅▅▅▄▄▆▅▂▂▁▂▄▂▅▄▆▂▆▄
+wandb:  encoder.layers.5.norm2_InputAngleStd █▅▆▅▄▆▅▆▄▃▄▁▂▁▂▄▂▂▃▃▄▄▄▄▃▃▄▄▃▃▄▄▃▄▄▄▄▄▄▄
+wandb:                                 epoch ▁▁▁▁▂▂▂▂▂▂▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▅▅▅▆▆▆▆▆▆▆▇▇▇██
+wandb:                            epoch_time ▇▇▆▆▇▇▇▇▇▇▆▇▇▇▆▇▁▂▇▇▇▆▆▇▇▇▇▇▆▆▇▇▇▆▇▇██▇▇
+wandb:                         learning_rate ▁▁▂▂▃▅▆▆▇████▇▇▇▇▇▇▆▆▆▆▆▆▆▆▆▅▅▅▅▅▅▅▅▅▅▅▄
+wandb:                             test_bleu ▁
+wandb:                             test_loss ▁
+wandb:                            train_loss █▅▅▅▅▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            valid_bleu ▂▃▃▃▁▄▄▆▇▇▇▇▇▇▇███▇█████████████████████
+wandb:                            valid_loss █▇▇▆▆▅▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb: decoder.layers.0.norm1_InputAngleMean 54.17719
+wandb:  decoder.layers.0.norm1_InputAngleStd 0.14812
+wandb: decoder.layers.0.norm2_InputAngleMean 84.14418
+wandb:  decoder.layers.0.norm2_InputAngleStd 0.12564
+wandb: decoder.layers.0.norm3_InputAngleMean 84.77359
+wandb:  decoder.layers.0.norm3_InputAngleStd 0.16532
+wandb: decoder.layers.1.norm1_InputAngleMean 85.53708
+wandb:  decoder.layers.1.norm1_InputAngleStd 0.20831
+wandb: decoder.layers.1.norm2_InputAngleMean 85.91456
+wandb:  decoder.layers.1.norm2_InputAngleStd 0.25544
+wandb: decoder.layers.1.norm3_InputAngleMean 86.32823
+wandb:  decoder.layers.1.norm3_InputAngleStd 0.29865
+wandb: decoder.layers.2.norm1_InputAngleMean 86.42828
+wandb:  decoder.layers.2.norm1_InputAngleStd 0.31258
+wandb: decoder.layers.2.norm2_InputAngleMean 86.55457
+wandb:  decoder.layers.2.norm2_InputAngleStd 0.35755
+wandb: decoder.layers.2.norm3_InputAngleMean 86.76436
+wandb:  decoder.layers.2.norm3_InputAngleStd 0.40118
+wandb: decoder.layers.3.norm1_InputAngleMean 86.56981
+wandb:  decoder.layers.3.norm1_InputAngleStd 0.39744
+wandb: decoder.layers.3.norm2_InputAngleMean 86.47655
+wandb:  decoder.layers.3.norm2_InputAngleStd 0.45992
+wandb: decoder.layers.3.norm3_InputAngleMean 86.54104
+wandb:  decoder.layers.3.norm3_InputAngleStd 0.47847
+wandb: decoder.layers.4.norm1_InputAngleMean 87.12115
+wandb:  decoder.layers.4.norm1_InputAngleStd 0.33702
+wandb: decoder.layers.4.norm2_InputAngleMean 88.26202
+wandb:  decoder.layers.4.norm2_InputAngleStd 0.33354
+wandb: decoder.layers.4.norm3_InputAngleMean 89.35358
+wandb:  decoder.layers.4.norm3_InputAngleStd 0.35762
+wandb: decoder.layers.5.norm1_InputAngleMean 89.43073
+wandb:  decoder.layers.5.norm1_InputAngleStd 0.37024
+wandb: decoder.layers.5.norm2_InputAngleMean 90.78975
+wandb:  decoder.layers.5.norm2_InputAngleStd 0.34839
+wandb: decoder.layers.5.norm3_InputAngleMean 90.76301
+wandb:  decoder.layers.5.norm3_InputAngleStd 0.8447
+wandb: encoder.layers.0.norm1_InputAngleMean 51.66685
+wandb:  encoder.layers.0.norm1_InputAngleStd 0.18086
+wandb: encoder.layers.0.norm2_InputAngleMean 84.52979
+wandb:  encoder.layers.0.norm2_InputAngleStd 0.20428
+wandb: encoder.layers.1.norm1_InputAngleMean 89.76691
+wandb:  encoder.layers.1.norm1_InputAngleStd 0.19364
+wandb: encoder.layers.1.norm2_InputAngleMean 89.29242
+wandb:  encoder.layers.1.norm2_InputAngleStd 0.18837
+wandb: encoder.layers.2.norm1_InputAngleMean 89.90413
+wandb:  encoder.layers.2.norm1_InputAngleStd 0.28434
+wandb: encoder.layers.2.norm2_InputAngleMean 89.57465
+wandb:  encoder.layers.2.norm2_InputAngleStd 0.29377
+wandb: encoder.layers.3.norm1_InputAngleMean 89.47173
+wandb:  encoder.layers.3.norm1_InputAngleStd 0.27392
+wandb: encoder.layers.3.norm2_InputAngleMean 89.4417
+wandb:  encoder.layers.3.norm2_InputAngleStd 0.25587
+wandb: encoder.layers.4.norm1_InputAngleMean 89.36123
+wandb:  encoder.layers.4.norm1_InputAngleStd 0.23186
+wandb: encoder.layers.4.norm2_InputAngleMean 89.34651
+wandb:  encoder.layers.4.norm2_InputAngleStd 0.19726
+wandb: encoder.layers.5.norm1_InputAngleMean 89.32838
+wandb:  encoder.layers.5.norm1_InputAngleStd 0.16131
+wandb: encoder.layers.5.norm2_InputAngleMean 89.33122
+wandb:  encoder.layers.5.norm2_InputAngleStd 0.13953
+wandb:                                 epoch 80
+wandb:                            epoch_time 19.31812
+wandb:                         learning_rate 0.00033
+wandb:                             test_bleu 17.42889
+wandb:                             test_loss 3.68588
+wandb:                            train_loss 3.18954
+wandb:                            valid_bleu 25.30482
+wandb:                            valid_loss 3.13871
+wandb: 
+wandb: 🚀 View run transformer-translation_e80_b128_d512_n6_h8_f2048_RMS_seed1_lr0.0001_transformer_warmup at: https://wandb.ai/whsjrc-buaa/transformer-translation/runs/t99de0kn
+wandb: ⭐️ View project at: https://wandb.ai/whsjrc-buaa/transformer-translation
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250429_000137-t99de0kn/logs
+	Train Loss: 3.171 | Train PPL:  23.839
+	Val Loss: 3.102 | Val PPL:  22.238
+	Val BLEU: 26.156
+	Learning Rate: 0.00034098
+step: 0, loss: 3.1577
+step: 100, loss: 3.2756
+step: 200, loss: 3.1226
+Epoch: 75 | Time: (0, 20)
+	Train Loss: 3.171 | Train PPL:  23.822
+	Val Loss: 3.149 | Val PPL:  23.316
+	Val BLEU: 25.546
+	Learning Rate: 0.00033869
+step: 0, loss: 3.1335
+step: 100, loss: 3.5959
+step: 200, loss: 3.0085
+Epoch: 76 | Time: (0, 20)
+	Train Loss: 3.177 | Train PPL:  23.970
+	Val Loss: 3.117 | Val PPL:  22.568
+	Val BLEU: 24.809
+	Learning Rate: 0.00033646
+step: 0, loss: 3.0334
+step: 100, loss: 2.9816
+step: 200, loss: 2.7737
+Epoch: 77 | Time: (0, 19)
+	Train Loss: 3.180 | Train PPL:  24.045
+	Val Loss: 3.111 | Val PPL:  22.447
+	Val BLEU: 26.719
+	Learning Rate: 0.00033427
+step: 0, loss: 2.9524
+step: 100, loss: 2.9917
+step: 200, loss: 3.3508
+Epoch: 78 | Time: (0, 19)
+	Train Loss: 3.185 | Train PPL:  24.156
+	Val Loss: 3.111 | Val PPL:  22.445
+	Val BLEU: 25.697
+	Learning Rate: 0.00033212
+step: 0, loss: 2.9464
+step: 100, loss: 2.9318
+step: 200, loss: 3.8722
+Epoch: 79 | Time: (0, 19)
+	Train Loss: 3.185 | Train PPL:  24.177
+	Val Loss: 3.117 | Val PPL:  22.570
+	Val BLEU: 25.982
+	Learning Rate: 0.00033001
+step: 0, loss: 2.8635
+step: 100, loss: 3.5970
+step: 200, loss: 2.8861
+Epoch: 80 | Time: (0, 19)
+	Train Loss: 3.190 | Train PPL:  24.277
+	Val Loss: 3.139 | Val PPL:  23.074
+	Val BLEU: 25.305
+	Learning Rate: 0.00032794
+| Test Loss: 3.686 | Test PPL:  39.880 | Test BLEU: 17.429 |
+RMSNorm训练完成时间: Tue Apr 29 00:27:54 CST 2025
+保存最新的RMSNorm模型文件:
+saved/model-RMS-seed1-lr0.0001-3.0581.pt
+==========================================================
+所有训练任务已完成!
+完成时间: Tue Apr 29 00:27:54 CST 2025
+日志文件已保存到: train_logs/train_comparison_20250429_000124.log
+训练模型已保存到saved目录
+==========================================================
+训练结果总结已保存到: train_logs/results_summary.txt
