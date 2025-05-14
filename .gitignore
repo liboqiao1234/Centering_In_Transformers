@@ -1,0 +1,53 @@
+# 忽略数据相关文件夹
+data/
+*/data/
+**/data/
+
+# 忽略结果文件夹
+results/
+result/
+*/result/
+*/results/
+**/result/
+**/results/
+
+# 忽略保存的模型文件夹
+saved/
+*/saved/
+**/saved/
+
+# 忽略wandb日志文件夹
+wandb/
+*/wandb/
+**/wandb/
+
+# 忽略缓存和临时文件
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.DS_Store
+
+# 忽略虚拟环境
+venv/
+env/
+ENV/
+
+# 忽略模型checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# 忽略日志文件
+*.log
+logs/
+*/logs/
+**/logs/
+
+# 忽略IDE配置文件
+.idea/
+.vscode/
+*.swp
+*.swo 
