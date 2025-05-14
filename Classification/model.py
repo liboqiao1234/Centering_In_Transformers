@@ -112,6 +112,11 @@ class SentimentClassifier(nn.Module):
             for _ in range(num_layers)
         ])
         
+        # 添加分类器层
+        self.classifier = nn.Linear(d_model, num_classes)
+        
+        self._init_parameters()
+    
     def _init_parameters(self):
         for p in self.parameters():
             if p.dim() > 1:

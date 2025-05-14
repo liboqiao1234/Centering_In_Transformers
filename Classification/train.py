@@ -10,12 +10,12 @@ from sklearn.metrics import accuracy_score, f1_score
 import random
 import logging
 from transformers import AutoTokenizer
-
+from transformers import get_linear_schedule_with_warmup
 from Taiyi.taiyi.monitor import Monitor
 import wandb
 from Taiyi.visualize import Visualization
 
-from data_utils import load_rt_dataset, load_sst5_dataset, load_amazon_polarity, get_dataloaders
+from data_utils import load_rt_dataset, load_sst5_dataset, load_amazon_polarity, load_yahoo_answers, get_dataloaders
 from model import SentimentClassifier
 
 # 设置日志
@@ -51,11 +51,13 @@ class LinearWarmupLinearDecayLR:
     def get_lr(self):
         if self._step_count <= self.warmup_steps:
             # 线性预热
-            return [base_lr * (self._step_count / self.warmup_steps) for base_lr in self._last_lr]
+            scale = max(1e-8, self._step_count / self.warmup_steps)
+            return [group['lr'] * scale for group in self.optimizer.param_groups]
         else:
-            # 线性衰减到0
-            remaining = max(0, (self.total_steps - self._step_count) / (self.total_steps - self.warmup_steps))
-            return [base_lr * remaining for base_lr in self._last_lr]
+            # 线性衰减，但最低不低于原始学习率的1%
+            progress = (self._step_count - self.warmup_steps) / (self.total_steps - self.warmup_steps)
+            scale = max(0.01, 1.0 - progress)  # 不低于1%
+            return [group['lr'] * scale for group in self.optimizer.param_groups]
     
     def step(self):
         self._step_count += 1
@@ -72,6 +74,7 @@ def train_epoch(model, dataloader, criterion, optimizer, device, scheduler=None)
     all_preds = []
     all_labels = []
     global monitor, step, vis_wandb
+    
     for batch in tqdm(dataloader, desc="Training"):
         input_ids = batch['input_ids'].to(device)
         attention_mask = batch['attention_mask'].to(device)
@@ -90,18 +93,35 @@ def train_epoch(model, dataloader, criterion, optimizer, device, scheduler=None)
         # 更新学习率（如果使用步数级调度器）
         if scheduler is not None:
             scheduler.step()
-            
+            if args.use_wandb:
+                current_lr = optimizer.param_groups[0]['lr']  # 获取当前学习率
+                wandb.log({"learning_rate": current_lr, "step": step})
+        
+        # 计算batch准确率
+        preds = torch.argmax(logits, dim=1).cpu().numpy()
+        batch_labels = labels.cpu().numpy()
+        batch_acc = accuracy_score(batch_labels, preds)
+        batch_f1 = f1_score(batch_labels, preds, average='macro')
+        
+        # 使用wandb记录每个batch的指标
         if args.use_wandb:
+            wandb.log({
+                "batch_loss": loss.item(),
+                "batch_acc": batch_acc,
+                "batch_f1": batch_f1,
+                "step": step
+            })
+            
+            # 模型监控和可视化
             monitor.track(step)
             vis_wandb.show(step)
-
+        
         step += 1
-
+        
         # 记录损失和预测结果
         epoch_loss += loss.item()
-        preds = torch.argmax(logits, dim=1).cpu().numpy()
         all_preds.extend(preds)
-        all_labels.extend(labels.cpu().numpy())
+        all_labels.extend(batch_labels)
     
     # 计算指标
     avg_loss = epoch_loss / len(dataloader)
@@ -127,11 +147,24 @@ def evaluate(model, dataloader, criterion, device):
             logits = model(input_ids, attention_mask)
             loss = criterion(logits, labels)
             
+            # 计算batch准确率
+            preds = torch.argmax(logits, dim=1).cpu().numpy()
+            batch_labels = labels.cpu().numpy()
+            batch_acc = accuracy_score(batch_labels, preds)
+            batch_f1 = f1_score(batch_labels, preds, average='macro')
+            
+            # 使用wandb记录每个验证batch的指标
+            if args.use_wandb:
+                wandb.log({
+                    "val_batch_loss": loss.item(),
+                    "val_batch_acc": batch_acc,
+                    "val_batch_f1": batch_f1
+                })
+            
             # 记录损失和预测结果
             epoch_loss += loss.item()
-            preds = torch.argmax(logits, dim=1).cpu().numpy()
             all_preds.extend(preds)
-            all_labels.extend(labels.cpu().numpy())
+            all_labels.extend(batch_labels)
     
     # 计算指标
     avg_loss = epoch_loss / len(dataloader)
@@ -163,15 +196,35 @@ def main(args):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     logger.info(f"使用设备: {device}")
     
-    # 加载数据集（改为Amazon Polarity）
-    logger.info("加载Amazon Polarity数据集...")
-    train_dataset, val_dataset, test_dataset, tokenizer = load_amazon_polarity(args.data_dir)
-    num_classes = 2
-    class_names = ['负面', '正面']
+    # 加载数据集
+    if args.dataset == 'yahoo_answers':
+        logger.info("加载Yahoo! Answers数据集...")
+        train_dataset, val_dataset, test_dataset, tokenizer = load_yahoo_answers(args.data_dir)
+        num_classes = 10
+        class_names = ['社会与文化', '科学与数学', '健康', '教育与参考', '计算机与互联网',
+                      '体育', '商业与金融', '娱乐与音乐', '家庭与人际关系', '政治与政府']
+    elif args.dataset == 'amazon_polarity':
+        logger.info("加载Amazon Polarity数据集...")
+        train_dataset, val_dataset, test_dataset, tokenizer = load_amazon_polarity(args.data_dir)
+        num_classes = 2
+        class_names = ['负面', '正面']
+    elif args.dataset == 'sst5':
+        logger.info("加载SST-5数据集...")
+        train_dataset, val_dataset, test_dataset, tokenizer = load_sst5_dataset(args.data_dir)
+        num_classes = 5
+        class_names = ['非常负面', '负面', '中性', '正面', '非常正面']
+    elif args.dataset == 'rt':
+        logger.info("加载Rotten Tomatoes数据集...")
+        train_dataset, val_dataset, test_dataset, tokenizer = load_rt_dataset(args.data_dir)
+        num_classes = 2
+        class_names = ['负面', '正面']
+    else:
+        raise ValueError(f"不支持的数据集: {args.dataset}")
     
     # 创建数据加载器
     train_loader, val_loader, test_loader = get_dataloaders(
         train_dataset, val_dataset, test_dataset, 
+        tokenizer=tokenizer,
         tokens_per_batch=args.tokens_per_batch,
         max_length=args.max_length
     )
@@ -197,12 +250,13 @@ def main(args):
     logger.info(f"模型总参数: {total_params:,} 可训练参数: {trainable_params:,}")
     
     # 定义损失函数和优化器
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = optim.AdamW(
         model.parameters(), 
         lr=args.lr, 
         betas=(args.beta1, args.beta2), 
-        eps=args.eps
+        eps=args.eps,
+        weight_decay=0.01
     )
     
     # 设置学习率调度器 - 使用线性预热和线性衰减
@@ -211,10 +265,10 @@ def main(args):
     total_steps = steps_per_epoch * args.epochs
     warmup_steps = int(total_steps * 0.05)  # 预热步数为总步数的5%
     
-    scheduler = LinearWarmupLinearDecayLR(
-        optimizer=optimizer,
-        warmup_steps=warmup_steps,
-        total_steps=total_steps
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=warmup_steps,
+        num_training_steps=total_steps
     )
     
     # 训练循环
@@ -224,12 +278,12 @@ def main(args):
     # 初始化wandb
     if args.use_wandb:
         norm_suffix = f"-{args.norm_type}"
-        run_name = f"amazon-polarity-transformer-{args.d_model}d-{args.num_layers}l{norm_suffix}"
+        run_name = f"{args.dataset}-transformer-{args.d_model}d-{args.num_layers}l{norm_suffix}"
         wandb.init(
             project="text-classification",
             name=run_name,
             config={
-                "dataset": "amazon-polarity",
+                "dataset": args.dataset,
                 "model": "transformer",
                 "d_model": args.d_model,
                 "num_layers": args.num_layers,
@@ -243,6 +297,7 @@ def main(args):
                 "warmup_steps": warmup_steps,
                 "total_steps": total_steps,
                 "norm_type": args.norm_type,
+                "num_classes": num_classes
             }
         )
         
