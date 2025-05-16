@@ -7,6 +7,10 @@ class OutputAngleMean(SingleStepQuantity):
 
     def _compute(self, global_step):
         data = self._module.output
+        # 处理 data 可能是元组的情况
+        if isinstance(data, tuple):
+            data = data[0]  # 假设第一个元素是主要输出
+        
         data = data.contiguous().view(data.shape[0], -1)
         ones = data.new_ones(data.shape)
         sum = data.sum(dim=1)
@@ -22,6 +26,10 @@ class OutputAngleMean(SingleStepQuantity):
 class OutputAngleStd(SingleStepQuantity):
     def _compute(self, global_step):
         data = self._module.output
+        # 处理 data 可能是元组的情况
+        if isinstance(data, tuple):
+            data = data[0]  # 假设第一个元素是主要输出
+            
         data = data.contiguous().view(data.shape[0], -1)
         ones = data.new_ones(data.shape)
         sum = data.sum(dim=1)

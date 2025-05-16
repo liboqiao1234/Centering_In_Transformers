@@ -181,8 +181,14 @@ def main():
             }
         )
         taiyi_config = {
-            "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)']],
-            "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)']],
+            "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                          ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+            "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                        ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+            "Attention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                          ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+            "Mlp": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                            ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
         }
         monitor = Monitor(model, taiyi_config)
         vis_wandb = Visualization(monitor, wandb)

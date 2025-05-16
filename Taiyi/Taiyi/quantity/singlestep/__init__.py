@@ -14,6 +14,7 @@ from .weight_grad_norm import WeightGradNorm
 from .linear_dead_neuron_num import LinearDeadNeuronNum
 from .rankme import RankMe
 from .input_angle import InputAngleStd, InputAngleMean
+from .output_angle import OutputAngleStd, OutputAngleMean
 
 
 
@@ -34,4 +35,6 @@ __all__ = [
     'RankMe',
     'InputAngleStd', 
     'InputAngleMean',
+    'OutputAngleStd',
+    'OutputAngleMean',
 ]
