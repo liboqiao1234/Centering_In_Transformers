@@ -1,0 +1,14 @@
+Metadata-Version: 2.2
+Name: Taiyi
+Version: 0.1.0
+Summary: A Toolkit for understanding the training of neural network
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Dist: wandb
+Requires-Dist: plotly
+Dynamic: classifier
+Dynamic: requires-dist
+Dynamic: summary
