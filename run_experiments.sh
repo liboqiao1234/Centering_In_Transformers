@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # 设置通用参数
+export HF_ENDPOINT="https://hf-mirror.com"
+export CUDA_VISIBLE_DEVICES="1"
+
 SEED=42
 export HF_MIRROR="https://mirror.huggingface.com"
 
@@ -113,8 +116,10 @@ python train.py \
   --batch-size 384 \
   --d-model 768 \
   --ffn-hidden 3072 \
-  --learning-rate 2e-4 \
+  --learning-rate 5e-4 \
   --dropout 0.2 \
+  --warmup-ratio 0.1 \
+  --clip 1.0 \
   --seed $SEED
 
 # RMSNorm
@@ -125,8 +130,10 @@ python train.py \
   --batch-size 384 \
   --d-model 768 \
   --ffn-hidden 3072 \
-  --learning-rate 2e-4 \
+  --learning-rate 5e-4 \
   --dropout 0.2 \
+  --warmup-ratio 0.1 \
+  --clip 1.0 \
   --seed $SEED
 
 cd ../..
@@ -134,4 +141,4 @@ cd ../..
 echo "====================================="
 echo "所有实验完成!" 
 
-shutdown
+# shutdown

@@ -31,7 +31,7 @@ class RMSNorm(nn.Module):
     """
     def __init__(self, dim, eps=1e-8):
         super().__init__()
-        self.scale = nn.Parameter(torch.ones(dim))
+        # self.scale = nn.Parameter(torch.ones(dim))
         self.eps = eps
     
     def forward(self, x):
@@ -39,8 +39,28 @@ class RMSNorm(nn.Module):
         ms = torch.mean(x ** 2, dim=-1, keepdim=True)
         # 标准化
         x_norm = x * torch.rsqrt(ms + self.eps)
-        # 缩放和偏移
-        return x_norm * self.scale
+        # 不再使用缩放
+        return x_norm
+        # return x_norm* self.scale
+
+class Mlp(nn.Module):
+    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.ReLU, drop=0.):
+        super().__init__()
+        out_features = out_features or in_features
+        hidden_features = hidden_features or in_features
+        self.fc1 = nn.Linear(in_features, hidden_features)
+        self.act = act_layer()
+        self.dropout1 = nn.Dropout(drop)
+        self.fc2 = nn.Linear(hidden_features, out_features)
+        self.dropout2 = nn.Dropout(drop)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.act(x)
+        x = self.dropout1(x)
+        x = self.fc2(x)
+        x = self.dropout2(x)
+        return x
 
 class TransformerEncoderLayer(nn.Module):
     def __init__(self, d_model=128, nhead=8, dim_feedforward=512, dropout=0.2, norm_type='layernorm'):
@@ -50,9 +70,13 @@ class TransformerEncoderLayer(nn.Module):
         self.self_attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
         
         # 前馈网络
-        self.linear1 = nn.Linear(d_model, dim_feedforward)
-        self.dropout1 = nn.Dropout(dropout)
-        self.linear2 = nn.Linear(dim_feedforward, d_model)
+        self.mlp = Mlp(
+            in_features=d_model,
+            hidden_features=dim_feedforward,
+            out_features=d_model,
+            act_layer=nn.ReLU,
+            drop=dropout
+        )
         
         # 归一化层 (LayerNorm 或 RMSNorm)
         if norm_type.lower() == 'rmsnorm':
@@ -63,8 +87,7 @@ class TransformerEncoderLayer(nn.Module):
             self.norm2 = nn.LayerNorm(d_model)
         
         # Dropout
-        self.dropout2 = nn.Dropout(dropout)
-        self.dropout3 = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(dropout)
         
     def forward(self, src, src_mask=None, src_key_padding_mask=None):
         # Pre-Norm架构
@@ -75,12 +98,12 @@ class TransformerEncoderLayer(nn.Module):
                               attn_mask=src_mask,
                               key_padding_mask=src_key_padding_mask)
         src2 = src2.transpose(0, 1)  # 转换回 [batch_size, seq_len, d_model]
-        src = src + self.dropout2(src2)
+        src = src + self.dropout(src2)
         
         # 第二个子层：前馈网络
         src2 = self.norm2(src)
-        src2 = self.linear2(self.dropout1(F.relu(self.linear1(src2))))
-        src = src + self.dropout3(src2)
+        src2 = self.mlp(src2)
+        src = src + self.dropout(src2)
         
         return src
 

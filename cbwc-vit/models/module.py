@@ -101,7 +101,7 @@ class RMSNormLayer(nn.Module):
         self,
         normalized_shape: _shape_t,
         eps: float = 1e-5,
-        elementwise_affine: bool = True,
+        elementwise_affine: bool = False,
         device=None,
         dtype=None,
     ) -> None:
@@ -139,9 +139,9 @@ class LayerNorm(nn.Module):
 
     def __init__(self, 
         normalized_shape: _shape_t,
-        elementwise_affine: bool = True,
+        elementwise_affine: bool = False,
         eps: float = 1e-5,
-        bias: bool = True,
+        bias: bool = False,
         device=None,
         dtype=None,
     ) -> None:
@@ -195,8 +195,8 @@ class RMSNorm(nn.Module):
     def __init__(self, 
         normalized_shape: _shape_t,
         eps: float = 1e-5,
-        elementwise_affine: bool = True,
-        bias: bool = True,
+        elementwise_affine: bool = False,
+        bias: bool = False,
         device=None,
         dtype=None,
     ) -> None:

@@ -185,8 +185,14 @@ def save_checkpoint(model, optimizer, epoch, best_val_f1, save_path):
 
 def main(args):
     taiyi_config = {
-        'LayerNorm':[['InputAngleMean', 'linear(5,0)'],['InputAngleStd', 'linear(5,0)']],
-        'RMSNorm':[['InputAngleMean', 'linear(5,0)'],['InputAngleStd', 'linear(5,0)']],
+        "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                        ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                    ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "MultiheadAttention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                        ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "Mlp": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+                        ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
     }
     
     # 设置随机种子

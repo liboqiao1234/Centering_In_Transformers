@@ -190,8 +190,10 @@ class VisionTransformer(nn.Module):
             if isinstance(m, nn.Linear) and m.bias is not None:
                 nn.init.constant_(m.bias, 0)
         elif isinstance(m, LayerNorm):
-            nn.init.constant_(m.bias, 0)
-            nn.init.constant_(m.weight, 1.0)
+            if hasattr(m, "bias") and m.bias is not None:
+                nn.init.constant_(m.bias, 0)
+            if hasattr(m, "weight") and m.weight is not None:
+                nn.init.constant_(m.weight, 1.0)
 
     def interpolate_pos_encoding(self, x, w, h):
         npatch = x.shape[1] - 1

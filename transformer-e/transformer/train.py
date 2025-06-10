@@ -30,35 +30,29 @@ def count_parameters(model):
 
 def initialize_weights(m):
     if hasattr(m, 'weight') and m.weight.dim() > 1:
-        nn.init.kaiming_uniform(m.weight.data)
-
-
-# 线性学习率调度器，包含预热期和线性衰减
-class LinearWarmupLinearDecayLR:
-    def __init__(self, optimizer, warmup_steps, total_steps, last_step=-1):
-        self.optimizer = optimizer
-        self.warmup_steps = warmup_steps
-        self.total_steps = total_steps
-        self.last_step = last_step
-        self._step_count = 0
-        self._last_lr = [group['lr'] for group in self.optimizer.param_groups]
+        # 使用Xavier均匀初始化代替Kaiming初始化
+        nn.init.xavier_uniform_(m.weight.data)
         
-    def get_lr(self):
-        if self._step_count <= self.warmup_steps:
-            # 线性预热
-            return [base_lr * (self._step_count / self.warmup_steps) for base_lr in self._last_lr]
-        else:
-            # 线性衰减到0
-            remaining = max(0, (self.total_steps - self._step_count) / (self.total_steps - self.warmup_steps))
-            return [base_lr * remaining for base_lr in self._last_lr]
+    # 初始化Transformer中的偏置
+    if hasattr(m, 'bias') and m.bias is not None:
+        nn.init.constant_(m.bias, 0)
+
+
+# 预热+线性递减学习率调度器
+def get_lr_scheduler(optimizer, warmup_steps, total_steps):
+    """
+    实现预热+线性递减的学习率调度策略
+    """
+    def lr_lambda(current_step):
+        if current_step < warmup_steps:
+            # 预热期间线性增加
+            return float(current_step) / float(max(1, warmup_steps))
+        # 预热后线性递减
+        return max(
+            0.0, float(total_steps - current_step) / float(max(1, total_steps - warmup_steps))
+        )
     
-    def step(self):
-        self._step_count += 1
-        values = self.get_lr()
-        for param_group, lr in zip(self.optimizer.param_groups, values):
-            param_group['lr'] = lr
-        self._last_lr = [group['lr'] for group in self.optimizer.param_groups]
-        return self._last_lr
+    return optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
 
 
 def train(model, iterator, optimizer, criterion, scheduler, monitor=None, vis_wandb=None):
@@ -80,18 +74,28 @@ def train(model, iterator, optimizer, criterion, scheduler, monitor=None, vis_wa
             monitor.track(step)
         if vis_wandb is not None:
             vis_wandb.show(step)
-        step += 1
+        
         loss.backward()
         
-        optimizer.step()
+        # 添加梯度裁剪，参考旧版代码
+        torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
         
-        # 每步更新学习率
+        optimizer.step()
+        # 每个batch更新学习率
         scheduler.step()
-            
+        
         epoch_loss += loss.item()
 
-        if i % 100 == 0:
-            print(f'step: {i}, loss: {loss.item():.4f}')
+        # 记录每个batch的loss到wandb
+        if (i+1) % 20 == 0:  # 每20个batch记录一次，减少IO负担
+            wandb.log({
+                "batch_loss": loss.item(), 
+                "step": step,
+                "learning_rate": optimizer.param_groups[0]['lr']
+            })
+            print(f'step: {i+1}/{len(iterator)}, loss: {loss.item():.4f}, lr: {optimizer.param_groups[0]["lr"]:.8f}')
+            
+        step += 1
 
     return epoch_loss / len(iterator)
 
@@ -124,7 +128,7 @@ def evaluate(model, iterator, criterion):
             if len(total_bleu) > 0:
                 batch_bleu.append(sum(total_bleu) / len(total_bleu))
 
-    return epoch_loss / len(iterator), sum(batch_bleu) / len(batch_bleu) if batch_bleu else 0
+    return epoch_loss / len(iterator), sum(batch_bleu) / len(batch_bleu) if len(batch_bleu) > 0 else 0
 
 
 def main():
@@ -139,8 +143,10 @@ def main():
     parser.add_argument('--n-layers', type=int, default=6, help='Number of layers')
     parser.add_argument('--n-heads', type=int, default=8, help='Number of attention heads')
     parser.add_argument('--ffn-hidden', type=int, default=2048, help='FFN hidden dimension')
-    parser.add_argument('--learning-rate', type=float, default=2e-4, help='Initial learning rate')
+    parser.add_argument('--learning-rate', type=float, default=5e-4, help='Initial learning rate')
     parser.add_argument('--dropout', type=float, default=0.2, help='Dropout rate')
+    parser.add_argument('--clip', type=float, default=1.0, help='Gradient clipping value')
+    parser.add_argument('--warmup-ratio', type=float, default=0.1, help='预热步数占总步数的比例')
     args = parser.parse_args()
     
     # 设置随机种子，确保实验可复现
@@ -161,6 +167,25 @@ def main():
     else:
         norm_type = 'RMS'  # 原来的代码是使用RMS
     
+    # 设置全局梯度裁剪值
+    global clip
+    clip = args.clip
+    
+    print("\n===== 训练参数 =====")
+    print(f"随机种子: {args.seed}")
+    print(f"归一化层类型: {args.norm_type}")
+    print(f"初始学习率: {args.learning_rate}")
+    print(f"训练轮数: {args.epochs}")
+    print(f"预热比例: {args.warmup_ratio}")
+    print(f"批量大小: {args.batch_size}")
+    print(f"梯度裁剪值: {args.clip}")
+    print(f"模型维度: {args.d_model}")
+    print(f"前馈网络维度: {args.ffn_hidden}")
+    print(f"注意力头数: {args.n_heads}")
+    print(f"编码器/解码器层数: {args.n_layers}")
+    print(f"Dropout概率: {args.dropout}")
+    print("=====================\n")
+    
     wandb.init(
         project="transformer-translation",
         name=f"transformer-translation_e{args.epochs}_b{args.batch_size}_d{args.d_model}_n{args.n_layers}_h{args.n_heads}_f{args.ffn_hidden}_{args.norm_type}_seed{args.seed}_lr{args.learning_rate}",
@@ -174,19 +199,18 @@ def main():
             "init_lr": args.learning_rate,
             "norm": args.norm_type,
             "seed": args.seed,
+            "warmup_ratio": args.warmup_ratio,
+            "clip": args.clip
         }
     )
 
     taiyi_config = {
-        "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)']],
-        "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)']],
+        "PositionwiseFeedForward": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "self_attention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
     }
     
-    print(f"使用随机种子: {args.seed}")
-    print(f"使用归一化层类型: {args.norm_type}")
-    print(f"初始学习率: {args.learning_rate}")
-    print(f"训练轮数: {args.epochs}")
-
     # 初始化 tokenizer
     tokenizer = Tokenizer()
 
@@ -225,20 +249,17 @@ def main():
     # 初始化优化器和损失函数
     optimizer = Adam(params=model.parameters(),
                      lr=args.learning_rate,
+                     betas=(0.9, 0.98),  # 修改为Transformer论文中推荐的值
                      weight_decay=weight_decay,
                      eps=adam_eps)
     
     # 计算总步数和预热步数
     steps_per_epoch = len(train_iter)
     total_steps = steps_per_epoch * args.epochs
-    warmup_steps = int(total_steps * 0.05)  # 预热步数为总步数的5%
+    warmup_steps = int(total_steps * args.warmup_ratio)
     
-    # 使用线性预热和线性衰减的调度器
-    scheduler = LinearWarmupLinearDecayLR(
-        optimizer=optimizer,
-        warmup_steps=warmup_steps,
-        total_steps=total_steps
-    )
+    # 使用预热+线性递减的学习率调度器
+    scheduler = get_lr_scheduler(optimizer, warmup_steps, total_steps)
     
     print(f"总训练步数: {total_steps}, 预热步数: {warmup_steps}")
 
@@ -253,7 +274,7 @@ def main():
         end_time = time.time()
         
         # 获取当前学习率
-        current_lr = scheduler._last_lr[0] if hasattr(scheduler, '_last_lr') else optimizer.param_groups[0]['lr']
+        current_lr = optimizer.param_groups[0]['lr']
 
         # 记录到 wandb
         wandb.log({

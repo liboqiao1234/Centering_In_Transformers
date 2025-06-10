@@ -1,4 +1,3 @@
-README.md
 setup.py
 Taiyi/__init__.py
 Taiyi.egg-info/PKG-INFO
@@ -27,6 +26,7 @@ Taiyi/quantity/multistep/var_tid.py
 Taiyi/quantity/multistep/weight_param_jump.py
 Taiyi/quantity/singlestep/__init__.py
 Taiyi/quantity/singlestep/base_class.py
+Taiyi/quantity/singlestep/input_angle.py
 Taiyi/quantity/singlestep/input_cov_condition.py
 Taiyi/quantity/singlestep/input_cov_condition20.py
 Taiyi/quantity/singlestep/input_cov_condition50.py
@@ -37,6 +37,7 @@ Taiyi/quantity/singlestep/input_mean.py
 Taiyi/quantity/singlestep/input_norm.py
 Taiyi/quantity/singlestep/input_std.py
 Taiyi/quantity/singlestep/linear_dead_neuron_num.py
+Taiyi/quantity/singlestep/output_angle.py
 Taiyi/quantity/singlestep/output_grad_norm.py
 Taiyi/quantity/singlestep/rankme.py
 Taiyi/quantity/singlestep/weight_grad_norm.py
