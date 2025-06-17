@@ -272,8 +272,9 @@ def vit_small(img_size=[224], patch_size=16, num_classes=1000, **kwargs):
     return model
 
 
-def vit_base(patch_size=16, num_classes=1000, **kwargs):
+def vit_base(img_size=[224], patch_size=16, num_classes=1000, **kwargs):
     model = VisionTransformer(
+        img_size=img_size,
         patch_size=patch_size, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
         qkv_bias=True, norm_layer=LayerNorm, num_classes=num_classes, **kwargs)
     return model

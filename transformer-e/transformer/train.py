@@ -209,6 +209,7 @@ def main():
         "self_attention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
         "LayerNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
         "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
+        nn.Dropout: [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'], ['OutputAngleStd', 'linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
     }
     
     # 初始化 tokenizer

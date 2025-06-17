@@ -50,16 +50,14 @@ class Mlp(nn.Module):
         hidden_features = hidden_features or in_features
         self.fc1 = nn.Linear(in_features, hidden_features)
         self.act = act_layer()
-        self.dropout1 = nn.Dropout(drop)
+        self.dropout = nn.Dropout(drop)
         self.fc2 = nn.Linear(hidden_features, out_features)
-        self.dropout2 = nn.Dropout(drop)
 
     def forward(self, x):
         x = self.fc1(x)
         x = self.act(x)
-        x = self.dropout1(x)
+        x = self.dropout(x)
         x = self.fc2(x)
-        x = self.dropout2(x)
         return x
 
 class TransformerEncoderLayer(nn.Module):
@@ -83,8 +81,8 @@ class TransformerEncoderLayer(nn.Module):
             self.norm1 = RMSNorm(d_model)
             self.norm2 = RMSNorm(d_model)
         else:  # 默认使用 LayerNorm
-            self.norm1 = nn.LayerNorm(d_model)
-            self.norm2 = nn.LayerNorm(d_model)
+            self.norm1 = nn.LayerNorm(d_model, elementwise_affine=False)
+            self.norm2 = nn.LayerNorm(d_model, elementwise_affine=False)
         
         # Dropout
         self.dropout = nn.Dropout(dropout)
