@@ -46,7 +46,18 @@ class CustomDataset(Dataset):
 
 
 
-def make_dataset(root_dir, splite_rate):
+def make_dataset(root_dir, splite_rate, data_seed=None):
+    """
+    创建数据集，支持指定数据分割种子
+    Args:
+        root_dir: 数据根目录
+        splite_rate: 分割比例
+        data_seed: 数据分割种子，如果为None则不设置
+    """
+    if data_seed is not None:
+        random.seed(data_seed)
+        print(f"Using data split seed: {data_seed}")
+    
     train_transform = build_transform(True)
     test_transform = build_transform(False)
     train_dataset = CustomDataset(train_transform)
@@ -60,7 +71,7 @@ def make_dataset(root_dir, splite_rate):
         if os.path.isdir(label_dir_path):
             # get all image under this label
             image_names = [f for f in os.listdir(label_dir_path) if os.path.isfile(os.path.join(label_dir_path, f))]
-            val_images = random.sample(image_names, int(len(image_names) * 0.2))
+            val_images = random.sample(image_names, int(len(image_names) * splite_rate))
 
             for image_name in image_names:
                 image_path = os.path.join(label_dir_path, image_name)

@@ -61,13 +61,21 @@ def main():
     dataset = 'cifar10'
 
     model_name = str(args.arch) + '_' + args.m + '_' + dataset + '_e' + str(args.epochs) + '_bs' + str(args.batch_size) + '_lr' + str(args.lr) + '_wd' + str(args.weight_decay)
-    model_name = model_name + '_wre' + str(args.warmup_epochs) + '_wk' + str(args.workers) + '_nc' + str(args.num_classes) + '_s' + str(args.seed) + '_ps' + str(args.patch_size) + '_' + args.norm_type
+    model_name = model_name + '_wre' + str(args.warmup_epochs) + '_wk' + str(args.workers) + '_nc' + str(args.num_classes) + '_s' + str(args.seed) + '_ds' + str(args.data_seed) + '_ps' + str(args.patch_size) + '_' + args.norm_type
 
-    random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
-    torch.cuda.manual_seed(args.seed)
-    torch.cuda.manual_seed_all(args.seed)
+    # 设置数据分割种子
+    if args.data_seed >= 0:
+        print(f"Setting data split seed to {args.data_seed}")
+        random.seed(args.data_seed)
+        np.random.seed(args.data_seed)
+    
+    # 设置模型初始化种子
+    if args.seed >= 0:
+        print(f"Setting model initialization seed to {args.seed}")
+        torch.manual_seed(args.seed)
+        torch.cuda.manual_seed(args.seed)
+        torch.cuda.manual_seed_all(args.seed)
+        # 为了保证模型初始化的一致性，这里也设置numpy和random（在数据加载完成后）
 
     # Data loading code
     datadir = args.data_path
@@ -115,9 +123,9 @@ def main():
         shuffle=False
     )
 
-
-
-    # train_dataset, test_dataset = make_dataset(root_dir=datadir, splite_rate=0.2)
+    # 如果需要使用自定义数据集分割，可以使用下面的代码：
+    # train_dataset, test_dataset = make_dataset(root_dir=datadir, splite_rate=0.2, 
+    #                                           data_seed=args.data_seed if args.data_seed >= 0 else None)
     #
     # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, num_workers=args.workers,
     #     pin_memory=True, shuffle=True)
@@ -126,6 +134,15 @@ def main():
     #     pin_memory=True, shuffle=False)
 
     print("Building data done with {} images loaded.".format(len(train_dataset)))
+
+    # 在模型初始化前再次设置模型初始化种子
+    if args.seed >= 0:
+        print(f"Re-setting model initialization seed to {args.seed}")
+        torch.manual_seed(args.seed)
+        torch.cuda.manual_seed(args.seed)
+        torch.cuda.manual_seed_all(args.seed)
+        np.random.seed(args.seed)
+        random.seed(args.seed)
 
     # build model
     print("creating model '{}'".format(args.arch))
@@ -176,6 +193,7 @@ def main():
                 "workers": args.workers,
                 "method": str('origin'),
                 "seed": args.seed,
+                "data_seed": args.data_seed,
                 "norm_type": args.norm_type,
                 "dropout": args.dropout,
             }

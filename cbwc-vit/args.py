@@ -41,7 +41,9 @@ def get_args():
     parser.add_argument('--num_classes', default=1000, type=int,   
                     help='number of classes')
     
-    parser.add_argument('--seed', default=-1, type=int, help='manual seed')
+    parser.add_argument('--seed', default=-1, type=int, help='manual seed for model initialization')
+    
+    parser.add_argument('--data_seed', default=-1, type=int, help='manual seed for data splitting')
 
     parser.add_argument('--wandb', default=False, type=bool, help='wandb log')
     
