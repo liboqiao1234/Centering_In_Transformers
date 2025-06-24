@@ -285,8 +285,12 @@ def main(args):
 
     # 初始化wandb
     if args.use_wandb:
-        norm_suffix = f"-{args.norm_type}"
-        run_name = f"{args.dataset}-transformer-{args.d_model}d-{args.num_layers}l{norm_suffix}"
+        if args.norm_type == "layernorm":
+            norm_suffix = f"-ln"
+        elif args.norm_type == "rmsnorm":
+            norm_suffix = f"-rms"
+        # norm_suffix = f"-{args.norm_type}"
+        run_name = f"{args.dataset}-{args.d_model}d-{args.num_layers}l{norm_suffix}-s{args.seed}"
         wandb.init(
             project="text-classification",
             name=run_name,

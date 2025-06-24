@@ -61,8 +61,6 @@ class MultiHeadAttention(nn.Module):
         
         # Attention dropout - 这个是我们要观测的
         self.attn_dropout = nn.Dropout(dropout)
-        # Output dropout - 这个也是我们要观测的
-        self.out_dropout = nn.Dropout(dropout)
         
         self.scale = 1.0 / math.sqrt(self.d_k)
     
@@ -100,7 +98,7 @@ class MultiHeadAttention(nn.Module):
         
         # 输出投影 + Output Dropout
         out = self.w_o(out)
-        out = self.out_dropout(out)  # 输出dropout
+        # out = self.out_dropout(out)  # 输出dropout
         
         return out, attn_weights
 
