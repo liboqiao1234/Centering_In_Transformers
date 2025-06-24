@@ -189,7 +189,7 @@ def main(args):
                         ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
         "RMSNorm": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
                     ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
-        "MultiheadAttention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
+        "MultiHeadAttention": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
                         ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],
         "Mlp": [['InputAngleStd','linear(5,0)'], ['InputAngleMean', 'linear(5,0)'],
                         ['OutputAngleStd','linear(5,0)'], ['OutputAngleMean', 'linear(5,0)']],

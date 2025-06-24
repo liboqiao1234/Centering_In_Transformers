@@ -43,6 +43,67 @@ class RMSNorm(nn.Module):
         return x_norm
         # return x_norm* self.scale
 
+class MultiHeadAttention(nn.Module):
+    """自定义Multi-Head Attention，暴露内部dropout供Taiyi观测"""
+    def __init__(self, d_model, nhead, dropout=0.1):
+        super().__init__()
+        assert d_model % nhead == 0
+        
+        self.d_model = d_model
+        self.nhead = nhead
+        self.d_k = d_model // nhead
+        
+        # 线性变换层
+        self.w_q = nn.Linear(d_model, d_model)
+        self.w_k = nn.Linear(d_model, d_model)
+        self.w_v = nn.Linear(d_model, d_model)
+        self.w_o = nn.Linear(d_model, d_model)
+        
+        # Attention dropout - 这个是我们要观测的
+        self.attn_dropout = nn.Dropout(dropout)
+        # Output dropout - 这个也是我们要观测的
+        self.out_dropout = nn.Dropout(dropout)
+        
+        self.scale = 1.0 / math.sqrt(self.d_k)
+    
+    def forward(self, query, key, value, attn_mask=None, key_padding_mask=None):
+        batch_size, seq_len, _ = query.size()
+        
+        # 线性变换并分割成多头
+        Q = self.w_q(query).view(batch_size, seq_len, self.nhead, self.d_k).transpose(1, 2)
+        K = self.w_k(key).view(batch_size, seq_len, self.nhead, self.d_k).transpose(1, 2)
+        V = self.w_v(value).view(batch_size, seq_len, self.nhead, self.d_k).transpose(1, 2)
+        
+        # 计算注意力分数
+        scores = torch.matmul(Q, K.transpose(-2, -1)) * self.scale
+        
+        # 应用mask
+        if key_padding_mask is not None:
+            # key_padding_mask: [batch_size, seq_len], True for padding
+            scores = scores.masked_fill(
+                key_padding_mask.unsqueeze(1).unsqueeze(2), 
+                float('-inf')
+            )
+        
+        if attn_mask is not None:
+            scores = scores + attn_mask
+        
+        # Softmax + Attention Dropout
+        attn_weights = F.softmax(scores, dim=-1)
+        attn_weights = self.attn_dropout(attn_weights)  # 内部attention dropout
+        
+        # 应用注意力权重
+        out = torch.matmul(attn_weights, V)
+        
+        # 合并多头
+        out = out.transpose(1, 2).contiguous().view(batch_size, seq_len, self.d_model)
+        
+        # 输出投影 + Output Dropout
+        out = self.w_o(out)
+        out = self.out_dropout(out)  # 输出dropout
+        
+        return out, attn_weights
+
 class Mlp(nn.Module):
     def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.ReLU, drop=0.):
         super().__init__()
@@ -64,8 +125,8 @@ class TransformerEncoderLayer(nn.Module):
     def __init__(self, d_model=128, nhead=8, dim_feedforward=512, dropout=0.2, norm_type='layernorm'):
         super(TransformerEncoderLayer, self).__init__()
         
-        # 多头自注意力机制
-        self.self_attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
+        # 多头自注意力机制 - 使用我们自定义的实现
+        self.self_attn = MultiHeadAttention(d_model, nhead, dropout=dropout)
         
         # 前馈网络
         self.mlp = Mlp(
@@ -84,24 +145,23 @@ class TransformerEncoderLayer(nn.Module):
             self.norm1 = nn.LayerNorm(d_model, elementwise_affine=False)
             self.norm2 = nn.LayerNorm(d_model, elementwise_affine=False)
         
-        # Dropout
-        self.dropout = nn.Dropout(dropout)
+        # 残差连接的Dropout - 给它们明确的名字方便Taiyi识别
+        self.attn_residual_dropout = nn.Dropout(dropout)
+        self.mlp_residual_dropout = nn.Dropout(dropout)
         
     def forward(self, src, src_mask=None, src_key_padding_mask=None):
         # Pre-Norm架构
         # 第一个子层：多头自注意力
         src2 = self.norm1(src)
-        src2 = src2.transpose(0, 1)  # 转换维度为 [seq_len, batch_size, d_model]
         src2, _ = self.self_attn(src2, src2, src2, 
-                              attn_mask=src_mask,
-                              key_padding_mask=src_key_padding_mask)
-        src2 = src2.transpose(0, 1)  # 转换回 [batch_size, seq_len, d_model]
-        src = src + self.dropout(src2)
+                               attn_mask=src_mask,
+                               key_padding_mask=src_key_padding_mask)
+        src = src + self.attn_residual_dropout(src2)
         
         # 第二个子层：前馈网络
         src2 = self.norm2(src)
         src2 = self.mlp(src2)
-        src = src + self.dropout(src2)
+        src = src + self.mlp_residual_dropout(src2)
         
         return src
 

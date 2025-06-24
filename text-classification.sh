@@ -1,7 +1,9 @@
 export HF_ENDPOINT="https://hf-mirror.com"
 export CUDA_VISIBLE_DEVICES="2"
+export WANDB_MODE="offline"
 
-SEED=42
+
+SEED=37
 export HF_MIRROR="https://mirror.huggingface.com"
 
 # 创建必要的目录

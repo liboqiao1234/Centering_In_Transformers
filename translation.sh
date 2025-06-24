@@ -1,5 +1,6 @@
 export HF_ENDPOINT="https://hf-mirror.com"
 export CUDA_VISIBLE_DEVICES="3"
+export WANDB_MODE="offline"
 
 SEED=42
 export HF_MIRROR="https://mirror.huggingface.com"
